@@ -1,0 +1,42 @@
+﻿@model List<Problem>
+<h1>Список задач</h1>
+@Html.ActionLink("Создать задачу","CreateTask","Admin")
+<table>
+    <thead>
+        <tr>
+            <th>
+                Название боя
+            </th>
+            <th>
+                Время начала
+            </th>
+            <th>
+                Кол-во участников
+            </th>
+            <th>
+                Жюри
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Problem elem in Model)
+        {
+            <tr>
+                <td>
+                    @elem.Id
+                </td>
+                <td>
+                    @elem.Text
+                </td>
+                <td>
+                    @Html.ActionLink(elem.Id.ToString(), "Task", "Admin")
+                </td>
+                <td>
+                    @Html.ActionLink(elem.Id.ToString(), "DeleteTask", "Admin")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

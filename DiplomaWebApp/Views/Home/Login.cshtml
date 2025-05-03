@@ -1,0 +1,11 @@
+﻿@{
+    Layout="_Layout_Main";
+}
+<h2>Вход в систему</h2>
+
+@using (Html.BeginForm("Login","Home",FormMethod.Post))
+{
+    @Html.TextBox("Login") <br />
+    @Html.TextBox("Password")
+    <input type="button" value="Войти" />
+}

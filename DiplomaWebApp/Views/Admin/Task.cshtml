@@ -1,0 +1,33 @@
+﻿@model Task
+
+<div>Id= @Model.Id </div><br />
+<div>Текст задачи: <input id="text" type="text" onclick=Update() /></div>
+
+<input value="Удалить задачу" type="button" onclick=Delete(@Model.Id)/>
+<script>
+    function Delete(id)
+    {
+        fetch("/Admin/DeleteTask",
+            {
+            method: "Delete",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(id)
+        }
+        )
+    }
+    function Update() {
+        id=@Model.Id
+        text=document.getElementById("text").innerText
+        fetch("/Admin/EditTask",
+            {
+                method: "Put",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify((id,text))
+            }
+        ) 
+    }
+</script>
