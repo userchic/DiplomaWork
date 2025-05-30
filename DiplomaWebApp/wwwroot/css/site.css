@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+table {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #000;
+}
+
+th {
+    border: 1px solid #000;
+} 

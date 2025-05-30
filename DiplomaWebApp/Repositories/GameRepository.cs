@@ -1,20 +1,23 @@
 ﻿using DiplomaWebApp.Abstractions;
+using DiplomaWebApp.DataBase;
 using DiplomaWebApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiplomaWebApp.Repositories
 {
-    public class GameRepository : AbstractRepository, IGameRepository
+    public class GameRepository : Repository, IGameRepository
     {
-        public Game GetGame(int id)
+        public GameRepository(MathBattlesDbContext context) : base(context)
+        {
+        }
+        public ICollection<Game> GetGames()
+        {
+            return _context.Games.Select(x => x).Include(x => x.Team1).ThenInclude(x=>x.Students).Include(x => x.Team2).ThenInclude(x=>x.Students).Include(x => x.Tasks).Include(x=>x.Assessors).ToArray();
+        }
+        public Game? GetGame(int id)
         {
             return _context.Games.Find(id);
         }
-
-        public ICollection<Game> GetGames()
-        {
-            return _context.Games.Select(x=>x).ToArray();
-        }
-
         public void AddGame(Game game)
         {
             _context.Games.Add(game);
@@ -27,5 +30,7 @@ namespace DiplomaWebApp.Repositories
         {
             _context.Games.Update(game);
         }
+
+
     }
 }

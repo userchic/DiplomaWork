@@ -1,10 +1,15 @@
 ﻿using DiplomaWebApp.Abstractions;
+using DiplomaWebApp.DataBase;
 using DiplomaWebApp.Models;
 
 namespace DiplomaWebApp.Repositories
 {
-    public class JureRepository : AbstractRepository, IJureRepository
+    public class JureRepository : Repository, IJureRepository
     {
+        public JureRepository(MathBattlesDbContext context) : base(context)
+        {
+        }
+
         public void AddJure(Jure newJure)
         {
             _context.Jures.Add(newJure);
@@ -19,7 +24,7 @@ namespace DiplomaWebApp.Repositories
 
         public Jure GetJure(string login)
         {
-            return _context.Jures.First(x => x.Login == login);
+            return _context.Jures.FirstOrDefault(x => x.Login == login);
             
         }
 

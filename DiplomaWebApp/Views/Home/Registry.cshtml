@@ -1,17 +1,17 @@
-﻿@{
+﻿
+@model Jure
+@{
     Layout="_Layout_Main";
 }
 <h2>Регистрация</h2>
 
-@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+@using (Html.BeginForm("Registry", "Home", FormMethod.Post))
 {
-    <div>Имя</div> 
-    @Html.TextBox("Name")<br/>
-    <div>Фамилия</div> @Html.TextBox("Surname") <br/>
-    <div>Отчество</div>@Html.TextBox("Fatname") <br/>
-
-    <div>Логин</div> @Html.TextBox("Login")<br/>
-    <div>Пароль</div> @Html.TextBox("Password")<br/>
-
-    <input type="button" value="Зарегистрироваться"/>
+    <div>Имя</div>      @Html.TextBox("name")    <br/>
+    <div>Фамилия</div>  @Html.TextBox("surname") <br/>
+    <div>Отчество</div> @Html.TextBox("fatname") <br/>
+    <div>Логин</div>    @Html.TextBox("login")   <br/>
+    <div>Пароль</div>   @Html.TextBox("password","","",new {@type="password"})<br/>
+    @ViewBag.Message
+    <input type="submit" value="Зарегистрироваться"/>
 }

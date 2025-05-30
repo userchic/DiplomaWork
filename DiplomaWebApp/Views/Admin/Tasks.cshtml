@@ -1,29 +1,25 @@
 ﻿@model List<Problem>
 <h1>Список задач</h1>
 @Html.ActionLink("Создать задачу","CreateTask","Admin")
-<table>
+<table border="1">
     <thead>
         <tr>
             <th>
-                Название боя
+                Id
             </th>
             <th>
-                Время начала
+                Текст
             </th>
             <th>
-                Кол-во участников
-            </th>
-            <th>
-                Жюри
             </th>
             <th>
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tasks">
         @foreach (Problem elem in Model)
         {
-            <tr>
+            <tr id="@elem.Id">
                 <td>
                     @elem.Id
                 </td>
@@ -31,12 +27,43 @@
                     @elem.Text
                 </td>
                 <td>
-                    @Html.ActionLink(elem.Id.ToString(), "Task", "Admin")
+                    @Html.ActionLink("Изменить","Task", "Admin",new {id=elem.Id.ToString()})
                 </td>
                 <td>
-                    @Html.ActionLink(elem.Id.ToString(), "DeleteTask", "Admin")
+                    <input type="button" onclick=Delete(@elem.Id) value="Удалить">
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+<script>
+    function Delete(id)
+    {
+        fetch("/Admin/DeleteTask/" + id,
+            {
+                method: "delete",
+            }
+        ).then((response)=>
+        {
+            if(response.status==404)
+                alert("Не найдена удаляемая задача.")
+            else
+            {
+                taskNodes=document.getElementById("tasks")
+                taskNodes.removeChild(FindNode(taskNodes,id))
+                return response.json()
+            }
+        }).then((body) => {
+            alert(body.message);
+        })
+    }
+    function FindNode(taskNodes,id) 
+    {
+        for (let i = 0; i < taskNodes.childElementCount; i++) {
+            if (taskNodes.children[i].id == id)
+                return taskNodes.children[i];
+        }
+    }
+</script>

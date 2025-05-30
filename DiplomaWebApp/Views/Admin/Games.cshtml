@@ -1,7 +1,7 @@
 ﻿@model List<Game>
 <h1>Список игр</h1>
 @Html.ActionLink("Создать игру","CreateGame","Admin")
-<table>
+<table border="1">
     <thead>
         <tr>
             <th>
@@ -31,13 +31,13 @@
                     @elem.StartTime
                 </td>
                 <td>
-                    @elem.Team1.Students.Count + elem.Team2.Students.Count
+                    @elem.Team1.Students.Count : @elem.Team2.Students.Count
                 </td>
                 <td>
                     @elem.Assessors.Count
                 </td>
                 <td>
-                    @Html.ActionLink(elem.Id.ToString(), "JoinGame", "Admin")
+                    @Html.ActionLink("Присоединиться", "JoinGame", "Admin")
                 </td>
             </tr>
         }

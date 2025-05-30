@@ -1,3 +1,4 @@
+using DiplomaWebApp.Abstractions;
 using DiplomaWebApp.DataBase;
 using DiplomaWebApp.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -19,14 +20,24 @@ builder.Services.AddAuthentication("Cookies")
     });
 builder.Services.AddAuthorization();
 
+builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IJureRepository, JureRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
+var mvcBuilder = builder.Services.AddRazorPages();
 
+if (builder.Environment.IsDevelopment())
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
@@ -42,6 +53,6 @@ app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Login}/{id?}");
+    pattern: "{controller=Admin}/{action=Games}/{id?}");
 
 app.Run();

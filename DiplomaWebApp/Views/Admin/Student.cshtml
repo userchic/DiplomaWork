@@ -1,0 +1,47 @@
+﻿@model Student
+
+<div>Id= @Model.Id </div><br />
+<div>Имя: <input id="Name" type="text" value="@Model.Name" /></div>
+<div>Фамилия: <input id="Surname" type="text" value="@Model.Surname" /></div>
+<div>Отчество: <input id="Fatname" type="text" value="@Model.Fatname" /></div>
+<div>Email: <input id="Email" type="text" value="@Model.Email" /></div>
+<div id="message">@ViewBag.Message</div>
+<input type="button" onclick=Update(@Model.Id) value="Зафиксировать изменения"/>
+
+<script>
+        function Update(Id)
+    {
+        Name=document.getElementById("Name").value
+        Surname=document.getElementById("Surname").value
+        Fatname=document.getElementById("Fatname").value
+        Email=document.getElementById("Email").value
+        response=fetch("/Admin/UpdateStudent",
+        {
+            method: "Put",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({
+                    "Id":Id,
+                    "Name": Name,
+                    "Surname": Surname,
+                    "Fatname": Fatname,
+                    "Email":Email
+            })
+        })
+        .then( response =>
+        {
+            Status=response.status
+            if (Status == 404)
+                    document.getElementById("message").innerText = "Не найден изменяемый объект"
+                else
+                {
+                    return response.json();
+                }
+            })
+            .then((body) =>
+            {
+                document.getElementById("message").innerText = body.message
+            })
+        }
+</script>
