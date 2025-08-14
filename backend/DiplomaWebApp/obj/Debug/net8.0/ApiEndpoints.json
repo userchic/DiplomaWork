@@ -1,0 +1,653 @@
+[
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CheckGameExist",
+    "RelativePath": "Admin/CheckGameExist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CheckStudentExist",
+    "RelativePath": "Admin/CheckStudentExist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CheckStudentsExist",
+    "RelativePath": "Admin/CheckStudentsExist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CheckTaskExist",
+    "RelativePath": "Admin/CheckTaskExist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CheckTasksExist",
+    "RelativePath": "Admin/CheckTasksExist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CheckTeamExist",
+    "RelativePath": "Admin/CheckTeamExist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CreateGame",
+    "RelativePath": "Admin/CreateGame",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "game",
+        "Type": "DiplomaWebApp.Records.GameRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CreateStudent",
+    "RelativePath": "Admin/CreateStudent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newStudent",
+        "Type": "DiplomaWebApp.Records.StudentRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "CreateTask",
+    "RelativePath": "Admin/CreateTask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newTask",
+        "Type": "DiplomaWebApp.Records.TaskRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "DeleteStudent",
+    "RelativePath": "Admin/DeleteStudent/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "DeleteTask",
+    "RelativePath": "Admin/DeleteTask/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GenerateTask",
+    "RelativePath": "Admin/GenerateTask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newTask",
+        "Type": "DiplomaWebApp.Records.TaskGenerateRequestRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GetGames",
+    "RelativePath": "Admin/GetGames",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GetStudent",
+    "RelativePath": "Admin/GetStudent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GetStudents",
+    "RelativePath": "Admin/GetStudents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GetTask",
+    "RelativePath": "Admin/GetTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GetTasks",
+    "RelativePath": "Admin/GetTasks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "UpdateStudent",
+    "RelativePath": "Admin/UpdateStudent",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changedStudent",
+        "Type": "DiplomaWebApp.Records.StudentRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "UpdateTask",
+    "RelativePath": "Admin/UpdateTask",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changedTask",
+        "Type": "DiplomaWebApp.Records.TaskRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "ConfirmChallengeAcceptance",
+    "RelativePath": "Game/ConfirmChallengeAcceptance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "ConfirmCorrectnessCheck",
+    "RelativePath": "Game/ConfirmCorrectnessCheck",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "ConfirmNoSolution",
+    "RelativePath": "Game/ConfirmNoSolution",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "ConfirmSolvingStart",
+    "RelativePath": "Game/ConfirmSolvingStart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "ConfirmStart",
+    "RelativePath": "Game/ConfirmStart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "DeclareBreak",
+    "RelativePath": "Game/DeclareBreak",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "initiatorTeamId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "DeclareChange",
+    "RelativePath": "Game/DeclareChange",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "initiatorTeamId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "newParticipantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "DeclareRoleChange",
+    "RelativePath": "Game/DeclareRoleChange",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isFullRoleChange",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "DownloadTasks",
+    "RelativePath": "Game/DownloadTasks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "EndGame",
+    "RelativePath": "Game/EndGame",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "EndRound",
+    "RelativePath": "Game/EndRound",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "record",
+        "Type": "DiplomaWebApp.Records.EndRoundRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "FixateChallenge",
+    "RelativePath": "Game/FixateChallenge",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "GetGame",
+    "RelativePath": "Game/GetGame",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "GetRounds",
+    "RelativePath": "Game/GetRounds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "RejectToChallenge",
+    "RelativePath": "Game/RejectToChallenge",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "SendTasks",
+    "RelativePath": "Game/SendTasks",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "SetCaptainsRoundWinner",
+    "RelativePath": "Game/SetCaptainsRoundWinner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "winnerTeamId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.GameController",
+    "Method": "StartNewRound",
+    "RelativePath": "Game/StartNewRound",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "round",
+        "Type": "DiplomaWebApp.Records.RoundRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.HomeController",
+    "Method": "Login",
+    "RelativePath": "Home/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "input",
+        "Type": "DiplomaWebApp.Records.LoginRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.HomeController",
+    "Method": "Logout",
+    "RelativePath": "Home/Logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.HomeController",
+    "Method": "Registry",
+    "RelativePath": "Home/Registry",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jure",
+        "Type": "DiplomaWebApp.Records.JureRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

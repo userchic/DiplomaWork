@@ -1,9 +1,0 @@
-﻿@model DiplomaWebApp.Records.TaskRecord
-@using (Html.BeginForm("CreateTask", "Admin",FormMethod.Post))
-{
-    <h1> Создание задач</h1>
-    //@Html.Hidden("Id")
-    <div>Текст задачи: <input asp-for="Text" type="text" value="" /></div>
-    @ViewBag.Message
-    <input value="Создать задачу" type="submit" />
-}

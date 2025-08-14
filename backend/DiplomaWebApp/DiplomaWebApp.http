@@ -1,0 +1,32 @@
+@DiplomaWebApp_HostAddress = http://localhost:5009
+
+POST {{DiplomaWebApp_HostAddress}}/Home/Login
+Accept: application/json
+
+POST {{DiplomaWebApp_HostAddress}}/Home/Logout
+Accept: application/json
+
+POST {{DiplomaWebApp_HostAddress}}/Home/Registry
+Accept: application/json
+
+GET {{DiplomaWebApp_HostAddress}}/Admin/Registry
+Accept: application/json
+
+GET {{DiplomaWebApp_HostAddress}}/Game/GetGame
+Accept: application/json
+
+POST {{DiplomaWebApp_HostAddress}}/Game/JoinGame
+Accept: application/json
+
+POST {{DiplomaWebApp_HostAddress}}/Game/ConfirmStart
+Accept: application/json
+
+GET {{DiplomaWebApp_HostAddress}}/Game/DownloadTask
+Accept: application/json
+
+POST {{DiplomaWebApp_HostAddress}}/Game/SendTasks
+Accept: application/json
+
+POST {{DiplomaWebApp_HostAddress}}/Game/ConfirmSolvingStart
+Accept: application/json
+###
