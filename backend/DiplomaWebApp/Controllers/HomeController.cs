@@ -32,10 +32,12 @@ namespace DiplomaWebApp.Controllers
         
         public IActionResult Login([FromBody]LoginRecord input)
         {
+            if (!ModelState.IsValid)
+            {
+                return JsonFirstError();
+            }
             string login=input.Login;
             string password=input.Password;
-            if (isEmptyLoginPassword(login, password))
-                return Json(new { success = 0, message = "Не введен пароль или логин" });
             Jure jure = jureRep.GetJure(login);
             if (jure == null)
             {
@@ -87,10 +89,8 @@ namespace DiplomaWebApp.Controllers
                 };
                 jureRep.AddJure(newJure);
                 jureRep.Save();
-                ViewBag.Message = "Вы успешно вошли в систему";
                 ExecuteLogin(jure.Login);
-                return Json(new { success = 1, message ="Вы успешно зарегистрировались и вошли в систему"});
-
+                return Json(new { success = 1, message = "Вы успешно зарегистрировались и вошли в систему" });
             }
         }
         [NonAction]
@@ -104,21 +104,7 @@ namespace DiplomaWebApp.Controllers
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
             HttpContext.SignInAsync(claimsPrincipal);
         }
-        [NonAction]
-        private bool isEmptyLoginPassword(string login, string password)
-        {
-            if (string.IsNullOrEmpty(login))
-            {
-                ViewBag.Message = "Логин должен быть не пустой строкой";
-                return true;
-            }
-            if (string.IsNullOrEmpty(password))
-            {
-                ViewBag.Message = "Пароль должен быть не пустой строкой";
-                return true;
-            }
-            return false;
-        }
+
         [NonAction]
         private IActionResult JsonFirstError()
         {

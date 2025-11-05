@@ -26,7 +26,7 @@ export default function TaskCard({ task, handleDelete }: Props) {
                 {task.Id}
             </td>
             <td>
-                {task.Text}
+                <p>{task.Text}</p>
             </td>
             <td>
                 <input type="button" value="Подробнее" onClick={ShowTask} />

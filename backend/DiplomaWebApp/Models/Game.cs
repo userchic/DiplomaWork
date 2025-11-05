@@ -38,7 +38,7 @@ namespace DiplomaWebApp.Models
         public Team Team2 { get; set; }
         public bool IsSolvingHasEnded()
         {
-            return TaskSolvingStartTime.HasValue && DateTime.Now > TaskSolvingStartTime.Value.Add(new TimeOnly(0, SolvingTime).ToTimeSpan()); 
+            return TaskSolvingStartTime.HasValue && DateTime.Now > TaskSolvingStartTime.Value.ToLocalTime().AddMinutes(SolvingTime); 
         }
         internal bool HasAssessor(Jure jure)
         {

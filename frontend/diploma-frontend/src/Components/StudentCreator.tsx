@@ -37,11 +37,19 @@ export default function StudentCreator() {
     }
     return (
         <>
-            <h1>Создание задачи</h1>
-            Имя:<input type="text" value={name} onChange={handleNameChange} /><br />
-            Фамилия:<input type="text" value={surname} onChange={handleSurnameChange} /><br />
-            Отчество:<input type="text" value={fatname} onChange={handleFatnameChange} /><br />
-            Email:<input type="text" value={email} onChange={handleEmailChange} /><br />
+            <h1>Создание студентов</h1>
+            <div style={{ display: "inline-block" }}>
+                Имя:<br />
+                Фамилия:<br />
+                Отчество:<br />
+                Email:
+            </div >
+            <div style={{ display: "inline-block" }}>
+                <input type="text" value={name} onChange={handleNameChange} /><br />
+                <input type="text" value={surname} onChange={handleSurnameChange} /><br />
+                <input type="text" value={fatname} onChange={handleFatnameChange} /><br />
+                <input type="text" value={email} onChange={handleEmailChange} /><br />
+            </div ><br />
             <input type="button" value="Создать задачу" onClick={Create} />
         </>
     )

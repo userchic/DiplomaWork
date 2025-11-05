@@ -15,11 +15,11 @@
           "Microsoft.EntityFrameworkCore": "9.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.6",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.22.1-Preview.1",
+          "Mistral.TaskTextGenerator": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "Swashbuckle.AspNetCore": "6.6.2",
-          "System.Text.Json": "9.0.6",
-          "ClassLibrary1": "1.0.0.0"
+          "System.Text.Json": "9.0.6"
         },
         "runtime": {
           "DiplomaWebApp.dll": {}
@@ -53,7 +53,7 @@
       },
       "Azure.Core/1.38.0": {
         "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
+          "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
           "System.ClientModel": "1.0.0",
           "System.Diagnostics.DiagnosticSource": "9.0.6",
           "System.Memory.Data": "1.0.2",
@@ -142,11 +142,11 @@
           }
         }
       },
-      "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
+      "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "4.700.20.21406"
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
@@ -263,6 +263,14 @@
           "lib/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll": {
             "assemblyVersion": "9.0.6.0",
             "fileVersion": "9.0.625.26607"
+          }
+        }
+      },
+      "Microsoft.Extensions.AI.Abstractions/9.5.0": {
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.AI.Abstractions.dll": {
+            "assemblyVersion": "9.5.0.0",
+            "fileVersion": "9.500.25.26507"
           }
         }
       },
@@ -499,6 +507,29 @@
           "lib/net8.0/MimeKit.dll": {
             "assemblyVersion": "4.12.0.0",
             "fileVersion": "4.12.0.0"
+          }
+        }
+      },
+      "Mistral.SDK/2.2.0": {
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
+          "Microsoft.Extensions.AI.Abstractions": "9.5.0"
+        },
+        "runtime": {
+          "lib/net8.0/Mistral.SDK.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        }
+      },
+      "Mistral.TaskTextGenerator/1.0.1": {
+        "dependencies": {
+          "Mistral.SDK": "2.2.0"
+        },
+        "runtime": {
+          "lib/net8.0/MistralBasedTaskTextGenerator.dll": {
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
           }
         }
       },
@@ -841,14 +872,6 @@
             "fileVersion": "6.0.21.52210"
           }
         }
-      },
-      "ClassLibrary1/1.0.0.0": {
-        "runtime": {
-          "ClassLibrary1.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
       }
     }
   },
@@ -921,12 +944,12 @@
       "path": "microsoft.aspnetcore.mvc.newtonsoftjson/8.0.18",
       "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.8.0.18.nupkg.sha512"
     },
-    "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
+    "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-yuvf07qFWFqtK3P/MRkEKLhn5r2UbSpVueRziSqj0yJQIKFwG1pq9mOayK3zE5qZCTs0CbrwL9M6R8VwqyGy2w==",
-      "path": "microsoft.bcl.asyncinterfaces/1.1.1",
-      "hashPath": "microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512"
+      "sha512": "sha512-3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw==",
+      "path": "microsoft.bcl.asyncinterfaces/8.0.0",
+      "hashPath": "microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512"
     },
     "Microsoft.CSharp/4.7.0": {
       "type": "package",
@@ -983,6 +1006,13 @@
       "sha512": "sha512-hr8vJSL1KXkXdgvNYY5peSygSZkoKQ+r6umXGMLoggBQ9NMbf0jo8p13Hy0biON2IS03ixOl0g4Mgw0hjgTksw==",
       "path": "microsoft.entityframeworkcore.sqlserver/9.0.6",
       "hashPath": "microsoft.entityframeworkcore.sqlserver.9.0.6.nupkg.sha512"
+    },
+    "Microsoft.Extensions.AI.Abstractions/9.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Y46j1S4zOPtLAHCUzhHIm1IhCMr7764754bLYupyc1JZcvLNXjUk+VC7H3Bou20S2hHgDJnfox7X/H/3BYEvzA==",
+      "path": "microsoft.extensions.ai.abstractions/9.5.0",
+      "hashPath": "microsoft.extensions.ai.abstractions.9.5.0.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "type": "package",
@@ -1144,6 +1174,20 @@
       "sha512": "sha512-PFUHfs6BZxKYM/QPJksAwXphbJf0SEfdSfsoQ6p6yvFRaJPofFJMBiotWhFRrdSUzfp6C6K49EjBIqIwZ2TJqA==",
       "path": "mimekit/4.12.0",
       "hashPath": "mimekit.4.12.0.nupkg.sha512"
+    },
+    "Mistral.SDK/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+XbVcwMbHF8mayZX2/EEaYmSpm+MCtCMsGh957UQ3jPd5U7fRuBLDa4MWXZ6fKU54okXknUmwY5HX9Z2UdnjXg==",
+      "path": "mistral.sdk/2.2.0",
+      "hashPath": "mistral.sdk.2.2.0.nupkg.sha512"
+    },
+    "Mistral.TaskTextGenerator/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mPqtiGkaa2EPpm9NGkMKJL9SuI2GrxLxxDhyVZTHhdopU8oCbNNK/lqZPQLjV0tAVzkO4N1g/n6wn6sLDz0gKA==",
+      "path": "mistral.tasktextgenerator/1.0.1",
+      "hashPath": "mistral.tasktextgenerator.1.0.1.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
@@ -1382,11 +1426,6 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
-    },
-    "ClassLibrary1/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

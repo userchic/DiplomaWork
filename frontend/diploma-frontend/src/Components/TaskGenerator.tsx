@@ -1,33 +1,32 @@
 import { useEffect, useState, type ChangeEvent } from "react"
 import { subjectTopics, type ISubject } from "../Models/SubjectTopics"
+import { GenerateTask } from "../Services/AdminService"
 
-export default function TaskGenerator()
-{
-    const [GeneratedText,setGeneratedText] = useState("")
-    
-    const [TaskAmount,setTaskAmount] = useState(0)
-    const [Subject,setSubject] = useState("")
-    const [Topic,setTopic] = useState("")
-    const [TaskSize,setTaskSize] = useState("")
-    const [QuestionsAmount,setQuestionsAmount] = useState(0)
-    const [Answer,setAnswer] = useState("")
-    const [currentSubject,setCurrentSubject] = useState<ISubject>(subjectTopics[0])
+export default function TaskGenerator() {
+    const [GeneratedText, setGeneratedText] = useState("")
+
+    const [TaskAmount, setTaskAmount] = useState(0)
+    const [Subject, setSubject] = useState("")
+    const [Topic, setTopic] = useState("")
+    const [TaskSize, setTaskSize] = useState("")
+    const [QuestionsAmount, setQuestionsAmount] = useState(0)
+    const [Answer, setAnswer] = useState("")
+    const [currentSubject, setCurrentSubject] = useState<ISubject>(subjectTopics[0])
 
     function handleTaskAmountChange(event: ChangeEvent<HTMLInputElement>): void {
         setTaskAmount(parseInt(event.target.value))
     }
 
     function handleSubjectChange(event: ChangeEvent<HTMLSelectElement>): void {
-        let subject= subjectTopics.filter((subject)=>subject.Subject==event.target.value).pop()
-        if (subject != null)
-        {
-        setCurrentSubject(subject)
-        setSubject(subject.Subject)
+        let subject = subjectTopics.filter((subject) => subject.Subject == event.target.value).pop()
+        if (subject != null) {
+            setCurrentSubject(subject)
+            setSubject(subject.Subject)
         }
-        else
-        {
-            setCurrentSubject({Subject:"",
-                Topics:[]
+        else {
+            setCurrentSubject({
+                Subject: "",
+                Topics: []
             })
             setSubject("")
         }
@@ -47,44 +46,59 @@ export default function TaskGenerator()
         setQuestionsAmount(parseInt(event.target.value))
     }
 
-    return(
+    function handleTaskGenerate(): void {
+        let res = GenerateTask({
+            AnswerSize: Answer,
+            QuestionsAmount: QuestionsAmount,
+            Subject: Subject,
+            TaskAmount: TaskAmount,
+            TaskSize: TaskSize,
+            Topic: Topic,
+        })
+        res.then(result => setGeneratedText(result.message))
+    }
+
+    return (
         <>
-            Сгенерированный текст: {GeneratedText}<br/>
-            Кол-во задач: <input type="number" value={TaskAmount} onChange={handleTaskAmountChange}/><br />
+            Сгенерированный текст: <br />
+            <p>{GeneratedText}</p>
+            <br />
+            Кол-во задач: <input type="number" value={TaskAmount} onChange={handleTaskAmountChange} /><br />
             Предмет:<select value={Subject} onChange={handleSubjectChange}>
-                <option value=""/>
+                <option value="" />
                 {
-                subjectTopics.map(subject=> {
-                    return (
-                        <option key={subject.Subject} value={subject.Subject}>{subject.Subject}</option>
-                    )
-                })
-                
+                    subjectTopics.map(subject => {
+                        return (
+                            <option key={subject.Subject} value={subject.Subject}>{subject.Subject}</option>
+                        )
+                    })
+
                 }
-            </select><br/>
+            </select><br />
             Тема:<select value={Topic} onChange={handleTopicChange}>
-                <option value=""/>
+                <option value="" />
                 {
-                    currentSubject.Topics.map(topicName=>{
-                        return(
+                    currentSubject.Topics.map(topicName => {
+                        return (
                             <option value={topicName}>{topicName}</option>
                         )
                     })
                 }
-                
-            </select><br/>
+
+            </select><br />
             Размер задачи:<select value={TaskSize} onChange={handleTaskSizeChange}>
-                    <option value=""/>
-                    <option value="Большой">Большой</option>
-                    <option value="Средний">Средний</option>
-                    <option value="Маленький">Маленький</option>
-                </select><br/>
-            Количество вопросов:<input type="number" value={QuestionsAmount} onChange={handleQuestionsAmountChange}/><br />
+                <option value="" />
+                <option value="Большой">Большой</option>
+                <option value="Средний">Средний</option>
+                <option value="Маленький">Маленький</option>
+            </select><br />
+            Количество вопросов:<input type="number" value={QuestionsAmount} onChange={handleQuestionsAmountChange} /><br />
             Ответ:<select value={Answer} onChange={handleAnswerChange}>
-                    <option value=""/>
-                    <option value="С красивым значением">С красивым значением</option>
-                    <option value="С некрасивым значением">С некрасивым значением</option>
-                </select>
+                <option value="" />
+                <option value="С красивым значением">С красивым значением</option>
+                <option value="С некрасивым значением">С некрасивым значением</option>
+            </select>
+            <input type="button" value="Сгенерировать текст задачи" onClick={handleTaskGenerate} />
         </>
     )
 }

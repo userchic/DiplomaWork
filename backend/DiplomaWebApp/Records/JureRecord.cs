@@ -8,7 +8,6 @@ namespace DiplomaWebApp.Records
         public string Name { get; set; }
         [Required(ErrorMessage = "Не введена фамилия пользователя, введите её")]
         public string Surname { get; set; }
-        [Required(ErrorMessage = "Не введено отчество пользователя, введите его")]
         public string Fatname { get; set; }
         [Required(ErrorMessage = "Не введен логин, введите его")]
         public string Login { get; set; }

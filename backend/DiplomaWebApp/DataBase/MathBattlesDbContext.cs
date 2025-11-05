@@ -67,13 +67,13 @@ namespace DiplomaWebApp.DataBase
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Jure>()
-                .HasMany(x => x.Games)
-                .WithOne(x => x.Assessor);
+            builder.Entity<Game>()
+                .HasOne(x => x.Assessor);
 
             builder.Entity<Game>()
-                .HasMany(x => x.Tasks)
-                .WithMany(x=>x.Games);
+                .HasMany(x => x.Tasks);
+
+            
 
             builder.Entity<Game>()
                 .HasOne(x => x.Team1);
@@ -85,20 +85,24 @@ namespace DiplomaWebApp.DataBase
             builder.Entity<CaptainsRound>()
                 .HasOne(x => x.Participant2);
 
-            builder.Entity<Team>()
-                .HasMany(x => x.Students).
-                WithMany(x=>x.Teams);
+            builder.Entity<Game>()
+                .HasOne(x => x.CaptainsRound)
+                .WithOne(x=>x.Game);
+
+            builder.Entity<Student>()
+                .HasMany<Team>()
+                .WithMany(x => x.Students);
+                
             builder.Entity<Team>().
                 HasOne(x => x.ViceCaptain);
             builder.Entity<Team>().
                 HasOne(x => x.Captain);
 
-            builder.Entity<Student>().
-                HasMany(x => x.OpponentRounds).
-                WithOne(x => x.Opponent);
-            builder.Entity<Student>().
-                HasMany(x => x.SpeakerRounds).
-                WithOne(x => x.Speaker);
+            builder.Entity<Round>().
+                HasOne(x => x.Opponent);
+            builder.Entity<Round>().
+                HasOne(x => x.Speaker);
+
             builder.Entity<Break>().
                 HasOne(x => x.InitiatorTeam).
                 WithMany(x=>x.Breaks);

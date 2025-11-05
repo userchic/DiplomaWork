@@ -60,7 +60,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
             alert(res.message)
             if (res.success) {
                 challenge.TaskId = TaskId
-                challenge.RequestingTeamId = Game.ChallengingTeamId
+                challenge.Task = Game.Tasks.$values.find((task) => task.Id == TaskId)
                 challenge.DeclareTime = new Date()
                 return true
             }
@@ -101,10 +101,16 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                 OpponentId: OpponentId,
                 SpeakerId: SpeakerId,
             })
+            alert(res.message)
             let result: boolean = res.success
             if (result) {
+                let Students = Game.Team1.Students.$values.concat(Game.Team2.Students.$values)
+                let Speaker = Students.find(x => x.Id == SpeakerId)
+                let Opponent = Students.find(x => x.Id == OpponentId)
                 challenge.Round = {
+                    Speaker: Speaker,
                     SpeakerId: SpeakerId,
+                    Opponent: Opponent,
                     OpponentId: OpponentId,
                     Breaks: { $values: [] },
                     Changes: { $values: [] },
@@ -115,15 +121,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
             return result
         }
         if (await startRound()) {
-            challenge.Round =
-            {
-                SpeakerId: SpeakerId,
-                OpponentId: OpponentId,
-                Breaks: { $values: [] },
-                Changes: { $values: [] },
-                RoundNumber: Game.Challenges.$values.length,
-                StartTime: new Date(),
-            }
+
 
             return true
         }
@@ -141,7 +139,13 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                             Tasks={Game.Tasks.$values}
                             CallingTeamName={Game.Team1Id == Game.ChallengingTeamId ? Game.Team1.Name : Game.Team2.Name}
                             ChallengeCall={(TaskId: number) => ChallengeCall(TaskId)}
-                            RejectToChallenge={RejectToChallenge}
+                            RejectToChallenge={async () => {
+                                let res = await RejectToChallenge()
+                                if (res) {
+                                    Game.TeamRejectedToChallenge = true;
+                                }
+                                return res
+                            }}
                         />
                     </>
                     : null
@@ -223,7 +227,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                                         Correctness: true,
                                         Mistakes: {
                                             $values: Mistakes
-                                        }
+                                        },
                                     }
                                     if (challenge.IsCheckingCorrectness && challenge.Round?.NoSolution)
                                         challenge.Round.RoundResults.Correctness = false
@@ -243,6 +247,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                                     RoleId: currentParticipantRole,
                                     NewParticipantId: NewParticipantId,
                                     InitiatorTeamId: RequestingTeamId,
+                                    InitiatorTeam: initiatorTeam
                                 })
                             }
                         }}
@@ -263,7 +268,6 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
             {
                 State == "info" ?
                     <InfoInterface
-                        ChallengingTeamId={Game.ChallengingTeamId}
                         Team1={Game.Team1}
                         Team2={Game.Team2}
                         Challenge={challenge} />

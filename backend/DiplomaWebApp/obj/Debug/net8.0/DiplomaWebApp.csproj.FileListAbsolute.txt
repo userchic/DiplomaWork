@@ -196,10 +196,11 @@ C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\obj\Debug\net8.0\DiplomaWebApp.genruntimeconfig.cache
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\obj\Debug\net8.0\ref\DiplomaWebApp.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\ClassLibrary1.dll
-C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\ClassLibrary1.pdb
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Npgsql.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Microsoft.Extensions.AI.Abstractions.dll
+C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Mistral.SDK.dll
+C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\MistralBasedTaskTextGenerator.dll

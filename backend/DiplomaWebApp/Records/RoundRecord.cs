@@ -5,6 +5,8 @@ namespace DiplomaWebApp.Records
 {
     public class RoundRecord
     {
+        [Required(ErrorMessage = "Не указан спикер")]
+        [Remote(action: "CheckStudentExist", controller: "Admin", ErrorMessage = "Выбран не существующий студент-спикер")]
         public int SpeakerId { get; set; }
         [Required(ErrorMessage = "Не указан оппонент")]
         [Remote(action: "CheckStudentExist", controller: "Admin", ErrorMessage = "Выбран не существующий студент-оппонент")]

@@ -39,6 +39,7 @@ builder.Services.AddScoped<ChangeRepository>();
 builder.Services.AddScoped<RolesChangesRepository>();
 builder.Services.AddScoped<MistakeRepository>();
 builder.Services.AddScoped<RoundResultRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

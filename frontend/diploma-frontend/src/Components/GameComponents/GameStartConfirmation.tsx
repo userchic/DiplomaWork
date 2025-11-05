@@ -17,6 +17,7 @@ export default function GameStartConfirmation() {
 
     return (
         <>
+            <center><h2>Подтверждение начала игры</h2></center>
             <center><input type="button" onClick={Confirm} value="Подтвердить начало игры" /></center>
         </>
     )

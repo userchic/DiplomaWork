@@ -50,7 +50,7 @@ namespace DiplomaWebApp.Controllers
         {
             Problem task = taskRep.GetTask(id);
             if (task is null)
-                NotFound();
+                return NotFound();
             return Json(task);
         }
         [HttpGet]
@@ -64,7 +64,7 @@ namespace DiplomaWebApp.Controllers
         {
             Student student = studentRep.GetStudent(id);
             if (student is null)
-                NotFound();
+                return NotFound();
             return Json(student);
         }
         #endregion
@@ -135,7 +135,7 @@ namespace DiplomaWebApp.Controllers
         public IActionResult GenerateTask(TaskGenerateRequestRecord newTask)
         {
             //нужно написать ключ перед использованием
-            string ApiKey = "";
+            string ApiKey = "sitPREo7rAV51ob6jU2OtPFtPgqweak9";
             try
             {
                 MistralAPIBasedTextGenerator.MistralAPIBasedTextGenerator.InitializeClient(ApiKey);
@@ -193,7 +193,7 @@ namespace DiplomaWebApp.Controllers
             }
             taskRep.RemoveTask(taskToBeDeleted);
             taskRep.Save();
-            return Json(new { success = 1, message = "Успешно удален студент" });
+            return Json(new { success = 1, message = "Успешно удалена задача" });
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteStudent(int id)

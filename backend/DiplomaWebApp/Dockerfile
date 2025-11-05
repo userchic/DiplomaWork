@@ -12,10 +12,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["DiplomaWebApp/DiplomaWebApp.csproj", "DiplomaWebApp/"]
+COPY ["DiplomaWebApp.csproj", "DiplomaWebApp/"]
 RUN dotnet restore "./DiplomaWebApp/DiplomaWebApp.csproj"
-COPY . .
 WORKDIR "/src/DiplomaWebApp"
+COPY . .
 RUN dotnet build "./DiplomaWebApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап

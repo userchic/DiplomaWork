@@ -5,7 +5,7 @@ interface Props {
 export default function StartOneTeamPerformance({ setState, RejectToChallenge }: Props) {
 
     function handleContinueRounds(): void {
-        setState("Challange")
+        setState("Challenge")
     }
 
     function handleRejectToChallenge(): void {

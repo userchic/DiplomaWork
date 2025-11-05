@@ -7,32 +7,30 @@ interface Props {
     Challenge: Challenge,
     Team1: Team,
     Team2: Team,
-    ChallengingTeamId: number
 }
-export default function infoInterface({ Challenge, Team1, Team2, ChallengingTeamId }: Props) {
+export default function infoInterface({ Challenge, Team1, Team2 }: Props) {
 
     let Round = Challenge.Round
-    const [CallingTeam] = useState(Team1.Id == ChallengingTeamId ? Team1 : Team2)
-    const [CalledTeam] = useState(Team1.Id == ChallengingTeamId ? Team2 : Team1)
 
-    const [SpeakerTeam] = useState(Challenge.IsCheckingCorrectness ? CallingTeam : CalledTeam)
-    const [OpponentTeam] = useState(Challenge.IsCheckingCorrectness ? CalledTeam : CallingTeam)
+    const [SpeakerId] = useState(Round?.SpeakerId)
+    const [OpponentId] = useState(Round?.OpponentId)
 
-    const [SpeakerId] = useState(Round.SpeakerId)
-    const [OpponentId] = useState(Round.OpponentId)
+    const [SpeakerTeam] = useState(SpeakerId == undefined ? null : Team1.Students.$values.find(x => x.Id == SpeakerId) === undefined ? Team2 : Team1)
+    const [OpponentTeam] = useState(OpponentId == undefined ? null : Team1.Students.$values.find(x => x.Id == OpponentId) === undefined ? Team2 : Team1)
+
     return (
         <>
             <h3> Описание Раунда</h3>
             Задача:{Challenge.Task?.Text}<br />
-            Проверка корректности: {Challenge.IsCheckingCorrectness}<br />
+            Проверка корректности: {Challenge.IsCheckingCorrectness ? "да" : "нет"}<br />
             {Round !== null && Round !== undefined ? <>
-                Изначальный Докладчик:{Round.Speaker.Surname} {Round.Speaker.Name} {Round.Speaker.Fatname} Email:{Round?.Speaker?.Email}<br />
-                Команда Докладчика: {SpeakerTeam.Name}<br />
-                Изначальный Оппонент:{Round.Opponent.Surname} {Round.Opponent.Name} {Round.Opponent.Fatname} Email:{Round?.Opponent?.Email}<br />
-                Команда Оппонента: {OpponentTeam.Name}<br />
+                Изначальный Докладчик:{Round.Speaker?.Surname} {Round?.Speaker?.Name} {Round.Speaker?.Fatname} Email:{Round?.Speaker?.Email}<br />
+                Команда Докладчика: {SpeakerTeam?.Name}<br />
+                Изначальный Оппонент:{Round?.Opponent?.Surname} {Round?.Opponent?.Name} {Round.Opponent?.Fatname} Email:{Round?.Opponent?.Email}<br />
+                Команда Оппонента: {OpponentTeam?.Name}<br />
                 <br />
                 {
-                    Round?.RolesChange !== null ?
+                    Round.RolesChange !== null && Round.RolesChange !== undefined ?
                         <>
                             Произошла {Round.RolesChange.FullRoleChange ? "полная" : "частичная"} перемена ролей<br />
                             Время перемены ролей: {Round.RolesChange.ChangeTime}
@@ -116,7 +114,8 @@ export default function infoInterface({ Challenge, Team1, Team2, ChallengingTeam
                         <>
                             Перерывов не произошло
                         </>
-                }<br />
+                }
+                <br />
                 {
                     Round.Changes.$values.length > 0 ?
                         <>

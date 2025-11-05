@@ -1134,8 +1134,7 @@
             }
           },
           "team2Name": {
-            "maxLength": 25,
-            "minLength": 3,
+            "minLength": 1,
             "type": "string"
           },
           "team2CaptainId": {
@@ -1152,7 +1151,6 @@
       },
       "JureRecord": {
         "required": [
-          "fatname",
           "login",
           "name",
           "password",
@@ -1169,8 +1167,8 @@
             "type": "string"
           },
           "fatname": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "login": {
             "minLength": 1,
@@ -1184,15 +1182,19 @@
         "additionalProperties": false
       },
       "LoginRecord": {
+        "required": [
+          "login",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "login": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -1221,7 +1223,8 @@
       "RoundRecord": {
         "required": [
           "gameId",
-          "opponentId"
+          "opponentId",
+          "speakerId"
         ],
         "type": "object",
         "properties": {
@@ -1311,8 +1314,7 @@
             "format": "int32"
           },
           "text": {
-            "maxLength": 500,
-            "minLength": 0,
+            "minLength": 1,
             "type": "string"
           }
         },

@@ -20,6 +20,7 @@ namespace DiplomaWebApp.Records
 
 
         [Required(ErrorMessage ="Не выбраны члены первой команды")]
+        [MasRange(0,999,ErrorMessage ="Должен быть указан хотя бы один член первой команды")]
         [Remote(action: "CheckStudentsExist", controller: "Admin", ErrorMessage = "Выбраны не существующие студенты")]
         public List<int> studentsTeam1 { get;set; }
         [Required(ErrorMessage = "Не указано название первой команды")]
@@ -33,15 +34,14 @@ namespace DiplomaWebApp.Records
 
         [Required(ErrorMessage = "Не выбраны члены второй команды")]
         [Remote(action: "CheckStudentsExist", controller: "Admin", ErrorMessage = "Выбраны не существующие студенты")]
-        [MasRange(0,21,ErrorMessage ="Количество указанных игроков в команде может быть от 1 до 20 человек, измените кол-во указанных студентов во второй команде ")]
+        [MasRange(0,999,ErrorMessage ="Должен быть указан хотя бы один член второй команды")]
         public List<int> studentsTeam2 { get;set; }
         [Required(ErrorMessage = "Не указано название второй команды")]
-        [StringLength(25, MinimumLength = 3,ErrorMessage ="Длина названия команды может быть от 3 до 25. введите название первой команды снова")]
         public string team2Name { get;set;}
         [Required(ErrorMessage = "Не указан номер капитана второй команды")]
-        [Remote(action: "CheckStudentExist", controller: "Admin", ErrorMessage = "Выбраны не существующий студент")]
+        [Remote(action: "CheckStudentExist", controller: "Admin", ErrorMessage = "Выбран не существующий студент")]
         public int team2CaptainId { get; set; }
-        [Remote(action: "CheckStudentExist", controller: "Admin", ErrorMessage = "Выбраны не существующий студент")]
+        [Remote(action: "CheckStudentExist", controller: "Admin", ErrorMessage = "Выбран не существующий студент")]
         public int? team2ViceCaptainId { get; set; }
     }
 }

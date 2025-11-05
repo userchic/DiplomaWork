@@ -118,6 +118,13 @@ namespace DiplomaWebApp.Controllers
                         sendEmailMessageWithFile(student.Email, $"tasks{gameId.ToString()}.docx");
                     }
                 }
+                foreach (Student student in currentGame.Team2.Students)
+                {
+                    if (!string.IsNullOrEmpty(student.Email))
+                    {
+                        sendEmailMessageWithFile(student.Email, $"tasks{gameId.ToString()}.docx");
+                    }
+                }
                 return Json(new { success = 1, message = "Задачи успешно отправлены игрокам на Email" });
             }
             return Json(new { success = 0, message = "Игра не проходит в данный момент или её проводит кто то другой" });
@@ -130,6 +137,10 @@ namespace DiplomaWebApp.Controllers
             if (currentGame is null)
             {
                 return NotFound();
+            }
+            if (!currentGame.IsSolvingHasEnded())
+            {
+                return Json(new { success = 0, message = "Решение задач еще не завершено" });
             }
             Jure requestingUser = jureRep.GetJure(HttpContext.User.Identity.Name);
             if (currentGame.Ongoing() && currentGame.Assessor.Equals(requestingUser))
@@ -232,6 +243,10 @@ namespace DiplomaWebApp.Controllers
                 {
                     return Json(new { success = 0, message = "Текущий раунд еще не завершен" });
                 }
+            }
+            if (!currentGame.Tasks.Any(x => x.Id == taskId))
+            {
+                return Json(new { success = 0, message = "Указанная задача не существует в рамках игры" });
             }
             currentGame.Challenges.Add(new Challenge()
             {
@@ -410,9 +425,29 @@ namespace DiplomaWebApp.Controllers
                     return Json(new { success = 0, message = "Нет вызова по которому необходимо начать раунд" });
                 }
             }
+            if(currentGame.ChallengingTeamId !=currentGame.Team1.Id && currentGame.ChallengingTeamId != currentGame.Team2.Id)
+            {
+                return Json(new { success = 0, message = "Указанная вызывающая команда не участвует в игре" });
+            }
+            var team1 = currentGame.Team1;
+            var team2 = currentGame.Team2;
+
+            var callingTeam = team1.Id == currentGame.ChallengingTeamId ? team1 : team2;
+            var calledTeam = team1.Id == currentGame.ChallengingTeamId ? team2 : team1;
+
+            var speakerTeam = currentGame.Challenges.Last().IsCheckingCorrectness ? callingTeam : calledTeam;
+            var opponentTeam = currentGame.Challenges.Last().IsCheckingCorrectness ? calledTeam : callingTeam;
+            if(speakerTeam.Students.Count(student=>student.Id==round.SpeakerId)==0)
+            {
+                return Json(new { success = 0, message = "данный студент не принадлежит к команде которая должна выступать спикером" });
+            }
+            if (opponentTeam.Students.Count(student => student.Id == round.OpponentId) == 0)
+            {
+                return Json(new { success = 0, message = "данный студент не принадлежит к команде которая должна выступать оппонентом" });
+            }
             Round newRound = new Round()
             {
-                OpponentId = round.OpponentId,
+               OpponentId = round.OpponentId,
                 SpeakerId = round.SpeakerId,
                 StartTime = DateTime.UtcNow,
                 ChallengeId = currentGame.Challenges.Last().Id,
@@ -464,18 +499,16 @@ namespace DiplomaWebApp.Controllers
             };
             currentGame.Team1Points += record.Team1Points;
             currentGame.Team2Points += record.Team2Points;
-
+            currentGame.Challenges.Last().Round.RoundResults = newRes;
 
             if (newRes.Correctness && !currentGame.TeamRejectedToChallenge)
             {
                 currentGame.ChallengingTeamId = currentGame.Team2Id + currentGame.Team1Id - currentGame.ChallengingTeamId;
             }
-            roundResultRep.AddResult(newRes);
+
             List<Mistake> newMistakes = record.Mistakes.Select(x => new Mistake(x)).ToList();
             newMistakes.ForEach(x => x.ResultsId = newRes.Id);
-            mistakeRep.AddRangeResult(newMistakes);
-            roundResultRep.Save();
-            mistakeRep.Save();
+            currentGame.Challenges.Last().Round.RoundResults.Mistakes = newMistakes;
             gameRep.Save();
             if (currentGame.Challenges.Count < currentGame.Tasks.Count)
                 return Json(new { success = 1, message = "Успешно завершен раунд" });
@@ -524,6 +557,10 @@ namespace DiplomaWebApp.Controllers
             {
                 return Json(new { success = 0, message = "Указана команда не участвующая в игре" });
             }
+            if (currentGame.Challenges.Count > 0 && currentGame.Challenges.Last().Round == null)
+            {
+                return Json(new { success = 0, message = "Раунд еще не начался, начните его указав участников выступления" });
+            }
             Team initiatorTeam = currentGame.Team1Id == initiatorTeamId ? currentGame.Team1 : currentGame.Team2;
             int RequestedBreaksAndChangesCost = (initiatorTeam.Breaks is not null ? initiatorTeam.Breaks.Count : 0) + (initiatorTeam.Changes is not null ? initiatorTeam.Changes.Count * 2 : 0);
             if (RequestedBreaksAndChangesCost > 5)
@@ -569,6 +606,10 @@ namespace DiplomaWebApp.Controllers
             {
                 return Json(new { success = 0, message = "Указана команда не участвующая в игре" });
             }
+            if (currentGame.Challenges.Count > 0 && currentGame.Challenges.Last().Round == null)
+            {
+                return Json(new { success = 0, message = "Раунд еще не начался, начните его указав участников выступления" });
+            }
             Team initiatorTeam = currentGame.Team1Id == initiatorTeamId ? currentGame.Team1 : currentGame.Team2;
             //вычисление стоимости уже запрошенных данной командой перерывов и замен
             int RequestedBreaksAndChangesCost = (initiatorTeam.Breaks is not null ? initiatorTeam.Breaks.Count : 0) + (initiatorTeam.Changes is not null ? initiatorTeam.Changes.Count * 2 : 0);
@@ -595,6 +636,7 @@ namespace DiplomaWebApp.Controllers
                     RoleId = newRole.Id
                 };
                 changeRep.AddChange(newChange);
+                changeRep.Save();
                 return Json(new { success = 1, message = "Успешно добавлена запись о замене участника" });
             }
         }
@@ -619,7 +661,6 @@ namespace DiplomaWebApp.Controllers
             {
                 return Json(new { success = 0, message = "Вы не указали результаты капитанского раунда" });
             }
-
             if (currentGame.Challenges.Last().Round.RolesChange is not null)
             {
                 return Json(new { success = 0, message = "В текущем раунде уже произошла перемена ролей" });
@@ -694,14 +735,15 @@ namespace DiplomaWebApp.Controllers
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("MathBattlesSender", "Math.Battles@mail.ru"));
             message.To.Add(new MailboxAddress("TargetTeamMember", email));
-            message.Subject = "Задачи математического боя от" + DateTime.Now.ToShortDateString;
+            message.Subject = "Задачи математического боя от" + DateTime.Now.ToShortDateString();
             var builder = new BodyBuilder();
-            builder.TextBody = "В данном сообщении содержится файл с задачами математического боя от " + DateTime.Now.ToShortDateString;
+            builder.TextBody = "В данном сообщении содержится файл с задачами математического боя от " + DateTime.Now.ToShortDateString();
             builder.Attachments.Add(fileName);
+            message.Body=builder.ToMessageBody();
             using (var client = new SmtpClient())
             {
                 client.Connect("smtp.mail.ru", 25, false);
-                client.Authenticate("Math.Battles@mail.ru", "0komodetS-4nissan-8sardiNka");
+                client.Authenticate("Math.Battles@mail.ru", "J5aJOwNVJ4I6qGaQYnXP");
                 client.Send(message);
                 client.Disconnect(true);
             }

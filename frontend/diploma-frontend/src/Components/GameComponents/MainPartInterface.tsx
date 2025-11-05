@@ -59,7 +59,7 @@ export default function MainPartInterface({ setState, Team1, Team2, ChallengingT
                 JureCost: 0,
                 Text: ""
             })
-            return currentMistakes
+            return [...currentMistakes]
         })
     }
     async function handleRoundEnd() {
@@ -88,7 +88,7 @@ export default function MainPartInterface({ setState, Team1, Team2, ChallengingT
     }
 
     function handleNoSolutionFixation(): void {
-        ConfirmNoSolution
+        ConfirmNoSolution()
     }
 
     return (
@@ -167,25 +167,22 @@ export default function MainPartInterface({ setState, Team1, Team2, ChallengingT
                         function handleMistakeTextChange(event: ChangeEvent<HTMLInputElement>): void {
                             setMistakes((currentMistakes) => {
                                 currentMistakes[index].Text = event.target.value
-                                return currentMistakes
+                                return [...currentMistakes]
                             })
-                            mistake.Text = event.target.value
                         }
 
                         function handleMistakeJureCostChange(event: ChangeEvent<HTMLInputElement>): void {
                             setMistakes((currentMistakes) => {
                                 currentMistakes[index].JureCost = parseInt(event.target.value)
-                                return currentMistakes
+                                return [...currentMistakes]
                             })
-                            mistake.JureCost = parseInt(event.target.value)
                         }
 
                         function handleMistakeOpponentCostChange(event: ChangeEvent<HTMLInputElement>): void {
                             setMistakes((currentMistakes) => {
                                 currentMistakes[index].OpponentsCost = parseInt(event.target.value)
-                                return currentMistakes
+                                return [...currentMistakes]
                             })
-                            mistake.OpponentsCost = parseInt(event.target.value)
                         }
 
                         return (

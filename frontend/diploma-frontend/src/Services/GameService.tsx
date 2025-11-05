@@ -171,7 +171,7 @@ export const DeclareChange = async (gameId: number, initiatorTeamId: number, new
     return await response.json().then((data) => data)
 }
 export const DeclareRoleChange = async (gameId: number, isFullRoleChange: boolean) => {
-    let requestLine = hostName + "/" + controllerName + "/DeclareRoleChange?gameId=" + gameId + "&isFullRoleChange=" + isFullRoleChange ? 1 : 0
+    let requestLine = hostName + "/" + controllerName + "/DeclareRoleChange?gameId=" + gameId + "&isFullRoleChange=" + (isFullRoleChange ? 1 : 0)
     let response = await fetch(requestLine, {
         method: "POST",
         credentials: "include",

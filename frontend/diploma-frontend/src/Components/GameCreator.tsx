@@ -80,7 +80,7 @@ export default function GameCreator() {
             role.isTeam2Lead = false
             role.isSemiTeam2Lead = false
         }
-        await setStudents(currentStudents)
+        await setStudents([...currentStudents])
     }
     function handleisTeam1LeadChange(student: Student) {
         let res = GetStudentRoleAndStudents(student)
@@ -107,7 +107,7 @@ export default function GameCreator() {
             role.isSemiTeam2Lead = false
         }
 
-        setStudents(currentStudents)
+        setStudents([...currentStudents])
     }
     function handleisSemiTeam1LeadChange(student: Student) {
         let res = GetStudentRoleAndStudents(student)
@@ -133,7 +133,7 @@ export default function GameCreator() {
             role.isTeam2Lead = false
             role.isSemiTeam2Lead = false
         }
-        setStudents(currentStudents)
+        setStudents([...currentStudents])
     }
     async function handleisTeam2Change(student: Student) {
         let res = GetStudentRoleAndStudents(student)
@@ -153,7 +153,7 @@ export default function GameCreator() {
             role.isTeam1Lead = false
             role.isSemiTeam1Lead = false
         }
-        await setStudents(currentStudents)
+        await setStudents([...currentStudents])
     }
     function handleisTeam2LeadChange(student: Student) {
         let res = GetStudentRoleAndStudents(student)
@@ -179,7 +179,7 @@ export default function GameCreator() {
             role.isTeam1Lead = false
             role.isSemiTeam1Lead = false
         }
-        setStudents(currentStudents)
+        setStudents([...currentStudents])
     }
     function handleisSemiTeam2LeadChange(student: Student) {
         let res = GetStudentRoleAndStudents(student)
@@ -205,7 +205,7 @@ export default function GameCreator() {
             role.isTeam1Lead = false
             role.isSemiTeam1Lead = false
         }
-        setStudents(currentStudents)
+        setStudents([...currentStudents])
     }
     function handleNameChange(event: ChangeEvent<HTMLInputElement>): void {
         setName(event.target.value)
@@ -286,139 +286,148 @@ export default function GameCreator() {
 
     return (
         <>
+            <h2>Запланирование игры</h2>
             <div style={{ display: "inline-block" }}>
-                Название игры <input type="text" value={Name} onChange={handleNameChange} />
-                <br />
-                Формат капитанского раунда <input type="text" value={CaptainsRoundFormat} onChange={handleCaptainsRoundFormatChange} />
-                <br />
-                Время решения задач <input type="number" value={SolvingTime} onChange={handleSolvingTimeChange} />
+                Название игры<br />
+                Формат капитанского раунда<br />
+                Время решения задач
             </div>
             <div style={{ display: "inline-block" }}>
-
+                <input type="text" value={Name} onChange={handleNameChange} />
                 <br />
-                Выберите задачи для игры <input type="button" value="Создать игру" onClick={Create} /><br />
+                <input type="text" value={CaptainsRoundFormat} onChange={handleCaptainsRoundFormatChange} />
+                <br />
+                <input type="number" value={SolvingTime} onChange={handleSolvingTimeChange} />
             </div>
             <br />
             <div style={{ display: "inline-block" }}>
-                Название 1 команды<input type="text" value={Team1Name} onChange={handleTeam1NameChange} />
-                <table border="1px">
-                    <thead>
-                        <tr>
-                            <th>
-                                Id
-                            </th>
-                            <th>
-                                Текст задачи
-                            </th>
-                            <th>
 
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Tasks?.map((task) => {
-                            function handleTaskChoiceChange(task: { Task: Task; chosen: boolean }): void {
-                                let currentTasks = Tasks
-                                let chosenTask = currentTasks?.filter((t) => {
-                                    if (t.Task.Id == task.Task.Id)
-                                        return true
-                                    return false
-                                }).pop()
-                                if (chosenTask !== undefined)
-                                    chosenTask.chosen = !chosenTask.chosen
-                                setTasks(currentTasks)
+                Выберите задачи для игры <input type="button" value="Создать игру" onClick={Create} /><br />
+            </div>
+            <br />
+            <div style={{ display: "flex" }}>
+                <div style={{ flex: 1 }}>
+                    Название 1 команды<input type="text" value={Team1Name} onChange={handleTeam1NameChange} />
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Текст задачи
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Tasks?.map((task) => {
+                                function handleTaskChoiceChange(task: { Task: Task; chosen: boolean }): void {
+                                    let currentTasks = Tasks
+                                    let chosenTask = currentTasks?.filter((t) => {
+                                        if (t.Task.Id == task.Task.Id)
+                                            return true
+                                        return false
+                                    }).pop()
+                                    if (chosenTask !== undefined)
+                                        chosenTask.chosen = !chosenTask.chosen
+                                    if (currentTasks !== undefined)
+                                        setTasks([...currentTasks])
+                                }
+
+                                return (
+                                    <>
+                                        <tr key={task.Task.Id}>
+                                            <td>
+                                                {task.Task.Id}
+                                            </td>
+                                            <td>
+                                                {task.Task.Text}
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" checked={task.chosen} onChange={() => handleTaskChoiceChange(task)} key={task.Task.Id} /> Выбрать
+                                            </td>
+                                        </tr>
+                                    </>
+                                )
                             }
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+                <div style={{ flex: 1 }}>
+                    Название 2 команды<input type="text" value={Team2Name} onChange={handleTeam2NameChange} />
+                    <table border="1px" class="table table-bordered" width="50%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Имя
+                                </th>
+                                <th>
+                                    Фамилия
+                                </th>
+                                <th>
+                                    Отчество
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
 
-                            return (
-                                <>
-                                    <tr>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Students?.map((student) => {
+                                return (
+                                    <tr key={student.Student.Id}>
                                         <td>
-                                            {task.Task.Id}
+                                            {student.Student.Id}
                                         </td>
                                         <td>
-                                            {task.Task.Text}
+                                            {student.Student.Name}
                                         </td>
                                         <td>
-                                            <input type="checkbox" checked={task.chosen} onChange={() => handleTaskChoiceChange(task)} /> Выбрать
+                                            {student.Student.Surname}
+                                        </td>
+                                        <td>
+                                            {student.Student.Fatname}
+                                        </td>
+                                        <td>
+                                            {student.Student.Email}
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" checked={student.role.isTeam1} onChange={() => {
+                                                handleisTeam1Change(student.Student)
+                                            }} />Команда 1
+                                            <input type="checkbox" checked={student.role.isTeam1Lead} onChange={() => {
+                                                handleisTeam1LeadChange(student.Student)
+                                            }} />Капитан 1 команды
+                                            <input type="checkbox" checked={student.role.isSemiTeam1Lead} onChange={() => {
+                                                handleisSemiTeam1LeadChange(student.Student)
+                                            }} />Заместитель капитана 1 команды<br />
+                                            <input type="checkbox" checked={student.role.isTeam2} onChange={() => {
+                                                handleisTeam2Change(student.Student)
+                                            }} />Команда 2
+                                            <input type="checkbox" checked={student.role.isTeam2Lead} onChange={() => {
+                                                handleisTeam2LeadChange(student.Student)
+                                            }} />Капитан 2 команды
+                                            <input type="checkbox" checked={student.role.isSemiTeam2Lead} onChange={() => {
+                                                handleisSemiTeam2LeadChange(student.Student)
+                                            }} />Заместитель капитана 2 команды
                                         </td>
                                     </tr>
-                                </>
-                            )
-                        }
-                        )}
-                    </tbody>
-                </table>
-            </div>
-            <div style={{ display: "inline-block" }} >
-                Название 2 команды<input type="text" value={Team2Name} onChange={handleTeam2NameChange} />
-                <table border="1px">
-                    <thead>
-                        <tr>
-                            <th>
-                                Id
-                            </th>
-                            <th>
-                                Имя
-                            </th>
-                            <th>
-                                Фамилия
-                            </th>
-                            <th>
-                                Отчество
-                            </th>
-                            <th>
-                                Email
-                            </th>
-                            <th>
 
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Students?.map((student) => {
-                            return (
-                                <tr>
-                                    <td>
-                                        {student.Student.Id}
-                                    </td>
-                                    <td>
-                                        {student.Student.Name}
-                                    </td>
-                                    <td>
-                                        {student.Student.Surname}
-                                    </td>
-                                    <td>
-                                        {student.Student.Fatname}
-                                    </td>
-                                    <td>
-                                        {student.Student.Email}
-                                    </td>
-                                    <td>
-                                        <input key={student.Student.Id} type="checkbox" checked={student.role.isTeam1} onChange={() => {
-                                            handleisTeam1Change(student.Student)
-                                        }} />Команда 1
-                                        <input key={student.Student.Id} type="checkbox" checked={student.role.isTeam1Lead} onChange={() => {
-                                            handleisTeam1LeadChange(student.Student)
-                                        }} />Капитан 1 команды
-                                        <input key={student.Student.Id} type="checkbox" checked={student.role.isSemiTeam1Lead} onChange={() => {
-                                            handleisSemiTeam1LeadChange(student.Student)
-                                        }} />Заместитель капитана 1 команды<br />
-                                        <input key={student.Student.Id} type="checkbox" checked={student.role.isTeam2} onChange={() => {
-                                            handleisTeam2Change(student.Student)
-                                        }} />Команда 2
-                                        <input key={student.Student.Id} type="checkbox" checked={student.role.isTeam2Lead} onChange={() => {
-                                            handleisTeam2LeadChange(student.Student)
-                                        }} />Капитан 2 команды
-                                        <input key={student.Student.Id} type="checkbox" checked={student.role.isSemiTeam2Lead} onChange={() => {
-                                            handleisSemiTeam2LeadChange(student.Student)
-                                        }} />Заместитель капитана 2 команды
-                                    </td>
-                                </tr>
-
-                            )
-                        })}
-                    </tbody>
-                </table>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     )

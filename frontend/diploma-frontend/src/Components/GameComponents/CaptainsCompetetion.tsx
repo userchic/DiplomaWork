@@ -58,6 +58,7 @@ export default function CaptainsCompetetion() {
 
     return (
         <>
+            <center><h2>Капитанский раунд</h2></center>
             <div style={{ display: "inline-block" }}>
                 Команда 1: {Team1Name} <br />
                 Участник от команды 1: {Team1ParticipantName}

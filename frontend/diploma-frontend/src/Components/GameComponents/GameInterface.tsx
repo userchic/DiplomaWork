@@ -48,22 +48,25 @@ export default function GameInterface() {
                     Correctness = false
                 if (Correctness && !Game.TeamRejectedToChallenge)
                     SwapChallengingTeams()
-                Challenges[Challenges.length - 1].Round.RoundResults =
+                var changedChallenges = Challenges
+                changedChallenges[changedChallenges.length - 1].Round.RoundResults =
                 {
-                    Correctness: Challenges[Challenges.length - 1].IsCheckingCorrectness && Challenges[Challenges.length - 1].Round.NoSolution ? true : false,
+                    Correctness: changedChallenges[changedChallenges.length - 1].IsCheckingCorrectness && changedChallenges[changedChallenges.length - 1].Round.NoSolution ? true : false,
                     Mistakes: { $values: EndRoundRequest.Mistakes },
                     Team1Points: EndRoundRequest.Team1Points,
                     Team2Points: EndRoundRequest.Team2Points,
                 }
-                if (Challenges.length < Game.Tasks.$values.length)
-                    setChallenges((currentChallenges) => {
-                        currentChallenges.push({
-                            GameId: Game.Id,
-                            IsCheckingCorrectness: false,
-                            IsChallengeAccepted: false
-                        })
-                        return currentChallenges
+                if (Challenges.length < Game.Tasks.$values.length) {
+                    changedChallenges.push({
+                        GameId: Game.Id,
+                        IsCheckingCorrectness: false,
+                        IsChallengeAccepted: false,
+                        RequestingTeamId: Game.ChallengingTeamId,
                     })
+                    setChallenges([...changedChallenges])
+                }
+                else
+                    getGame();
             }
             return result
         }

@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react"
 import type { Task } from "../../Models/Task"
-import { RejectToChallenge } from "../../Services/GameService"
+
 interface Props {
     setState: (newState: string) => void
     Tasks: Task[],
@@ -18,7 +18,7 @@ export default function ChallengeInterface({ setState, Tasks, CallingTeamName, C
             setState("CallAcceptRejection")
     }
     async function handleRejectToChallenge() {
-        if (await RejectToChallenge) {
+        if (await RejectToChallenge()) {
             setState("LastTeamWantsToPerform")
         }
     }
