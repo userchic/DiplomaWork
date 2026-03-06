@@ -7,13 +7,15 @@ namespace DiplomaWebApp.Repositories
 {
     public class GameRepository : Repository, IGameRepository
     {
+        int pageSize = 10;
         public GameRepository(MathBattlesDbContext context) : base(context)
         {
             
         }
-        public ICollection<Game> GetGames()
+        public ICollection<Game> GetGames(int page = 1)
         {
-            return _context.Games.Select(x => x).
+            int lastGameId = _context.Games.OrderBy(x=>x.Id).Last().Id;
+            return _context.Games.OrderBy(x => -x.Id).Where(x => (x.Id >= lastGameId - pageSize * page && x.Id <= lastGameId - pageSize * (page-1))).
                 Include(x => x.Team1).ThenInclude(x => x.Students).
                 Include(x => x.Team2).ThenInclude(x => x.Students).
                 Include(x => x.Tasks).
@@ -23,6 +25,7 @@ namespace DiplomaWebApp.Repositories
                 Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.Changes).
                 Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.RolesChange).
                 Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.RoundResults).ThenInclude(x => x.Mistakes).
+                Take(10).
                 ToArray();
         }
         public Game? GetGame(int id)

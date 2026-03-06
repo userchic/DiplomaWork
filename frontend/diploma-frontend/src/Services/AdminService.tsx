@@ -7,8 +7,8 @@ import { hostName } from "./HostName";
 let controllerName = "Admin"
 
 
-export const GetGames = async () => {
-  let requestLine = hostName + "/" + controllerName + "/GetGames"
+export const GetGames = async (page: number) => {
+  let requestLine = hostName + "/" + controllerName + "/GetGames" + "?page=" + page
   let response = await fetch(requestLine, {
     credentials: "include",
   })

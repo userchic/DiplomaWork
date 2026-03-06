@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.IdentityModel.Tokens;
+using Prometheus;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -16,17 +17,18 @@ namespace DiplomaWebApp.Controllers
 {
     [ApiController]
     [Route("/[controller]/[action]")]
-    [EnableCors()]
+    [EnableCors("AllowOneOrigin")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
         public IJureRepository jureRep;
+        Counter _loginCounter;
+        Counter _registryCounter;
         public HomeController(ILogger<HomeController> logger,
             IJureRepository jurerep,MathBattlesDbContext context)
         {
             jureRep = jurerep;
-            _logger = logger;
+            _loginCounter = Metrics.CreateCounter("logins_total", "increments on login");
+            _registryCounter = Metrics.CreateCounter("registries_total", "increments on registry");
         }
         [HttpPost]
         
@@ -36,6 +38,8 @@ namespace DiplomaWebApp.Controllers
             {
                 return JsonFirstError();
             }
+            _loginCounter.Inc();
+            _loginCounter.Publish();
             string login=input.Login;
             string password=input.Password;
             Jure jure = jureRep.GetJure(login);
@@ -79,6 +83,8 @@ namespace DiplomaWebApp.Controllers
             }
             else
             {
+                _registryCounter.Inc();
+                _registryCounter.Publish();
                 Jure newJure = new Jure()
                 {
                     Name = jure.Name,
@@ -93,7 +99,6 @@ namespace DiplomaWebApp.Controllers
                 return Json(new { success = 1, message = "¬ы успешно зарегистрировались и вошли в систему" });
             }
         }
-        [NonAction]
         private void ExecuteLogin(string login)
         {
             var claims = new List<Claim>
@@ -104,8 +109,6 @@ namespace DiplomaWebApp.Controllers
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
             HttpContext.SignInAsync(claimsPrincipal);
         }
-
-        [NonAction]
         private IActionResult JsonFirstError()
         {
             return Json(new { success = 0, message = ModelState.First(x => x.Value.Errors.Count > 0).Value.Errors.First().ErrorMessage });

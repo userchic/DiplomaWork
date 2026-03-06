@@ -281,7 +281,12 @@ export default function GameCreator() {
             team2CaptainId: team2CaptainId,
             team2ViceCaptainId: team2SemiCaptainId
         })
-        res.then(data => alert(data.message))
+        res.then(result => {
+            if (result.success !== undefined)
+                alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
+        })
     }
 
     return (

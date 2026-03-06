@@ -66,8 +66,7 @@ namespace DiplomaWebApp.Controllers
             Jure requestingUser = jureRep.GetJure(HttpContext.User.Identity.Name);
             if (!targetGame.Ongoing())
             {
-                targetGame.Assessor = requestingUser;
-                targetGame.StartTime = DateTime.UtcNow;
+                targetGame.ConfirmStart(requestingUser);
                 gameRep.Save();
                 return Json(new { success = 1, message = "Игра успешно начата" });
             }
@@ -151,15 +150,7 @@ namespace DiplomaWebApp.Controllers
                 }
                 if (currentGame.CaptainsRound is null)
                 {
-                    CaptainsRound round = new CaptainsRound()
-                    {
-                        GameId = currentGame.Id,
-                        Participant1Id = (int)currentGame.Team1.CaptainId,
-                        Participant2Id = (int)currentGame.Team2.CaptainId,
-                        WinnerId = winnerTeamId
-                    };
-                    currentGame.ChallengingTeamId = winnerTeamId;
-                    currentGame.CaptainsRound = round;
+                    currentGame.SetCaptainsRoundWinner(winnerTeamId);
                     gameRep.Save();
                     return Json(new { success = 1, message = "Успешно сохранена информация о результатах капитанского раунда" });
                 }
@@ -183,7 +174,7 @@ namespace DiplomaWebApp.Controllers
                 {
                     return Json(new { success = 0, message = "Начало решения задач уже зафиксировано" });
                 }
-                currentGame.TaskSolvingStartTime = DateTime.UtcNow;
+                currentGame.ConfirmSolvingStart();
                 gameRep.Save();
                 return Json(new { success = 1, time = currentGame.SolvingTime });
             }
@@ -248,13 +239,7 @@ namespace DiplomaWebApp.Controllers
             {
                 return Json(new { success = 0, message = "Указанная задача не существует в рамках игры" });
             }
-            currentGame.Challenges.Add(new Challenge()
-            {
-                GameId = gameId,
-                DeclareTime = DateTime.UtcNow,
-                RequestingTeamId = currentGame.ChallengingTeamId.Value,
-                TaskId = taskId,
-            });
+            currentGame.FixateChallenge(taskId);
             gameRep.Save();
             return Json(new { success = 1, message = "успешно объявлен вызов" });
         }
@@ -295,8 +280,7 @@ namespace DiplomaWebApp.Controllers
             {
                 return EndGame(gameId);
             }
-            currentGame.ChallengingTeamId = currentGame.Team2Id + currentGame.Team1Id - currentGame.ChallengingTeamId;
-            currentGame.TeamRejectedToChallenge = true;
+            currentGame.FixateChallengeRejection();
             gameRep.Save();
             return Json(new { success = 1, message = "Изменен порядок игры, теперь выступать будет только одна команда. Если она откажется выступать то игра закончится." });
         }
@@ -340,7 +324,7 @@ namespace DiplomaWebApp.Controllers
             {
                 return Json(new { success = 0, message = "Вызов уже был принят, отвергнут или была зафиксирована проверка корректности" });
             }
-            currentGame.Challenges.Last().IsCheckingCorrectness = true;
+            currentGame.FixateCorrectnessCheck();
             gameRep.Save();
             return Json(new { success = 1, message = "Зафиксирована проверка корректности" });
         }
@@ -384,7 +368,7 @@ namespace DiplomaWebApp.Controllers
             {
                 return Json(new { success = 0, message = "Вызов уже был принят, отвергнут или была зафиксирована проверка корректности" });
             }
-            currentGame.Challenges.Last().IsChallengeAccepted = true;
+            currentGame.FixateChallengeAcceptance();
             gameRep.Save();
             return Json(new { success = 1, message = "Зафиксировано принятие вызова" });
         }
@@ -455,7 +439,7 @@ namespace DiplomaWebApp.Controllers
             };
             roundRep.AddRound(newRound);
             roundRep.Save();
-            currentGame.Challenges.Last().Round = newRound;
+            currentGame.StartRound(newRound);
             gameRep.Save();
             return Json(new { success = 1, message = "Успешно начат новый раунд" });
         }
@@ -497,18 +481,7 @@ namespace DiplomaWebApp.Controllers
                 Team2Points = record.Team2Points,
                 RoundId = currentGame.Challenges.Last().Round.Id
             };
-            currentGame.Team1Points += record.Team1Points;
-            currentGame.Team2Points += record.Team2Points;
-            currentGame.Challenges.Last().Round.RoundResults = newRes;
-
-            if (newRes.Correctness && !currentGame.TeamRejectedToChallenge)
-            {
-                currentGame.ChallengingTeamId = currentGame.Team2Id + currentGame.Team1Id - currentGame.ChallengingTeamId;
-            }
-
-            List<Mistake> newMistakes = record.Mistakes.Select(x => new Mistake(x)).ToList();
-            newMistakes.ForEach(x => x.ResultsId = newRes.Id);
-            currentGame.Challenges.Last().Round.RoundResults.Mistakes = newMistakes;
+            currentGame.EndRound(newRes, record);
             gameRep.Save();
             if (currentGame.Challenges.Count < currentGame.Tasks.Count)
                 return Json(new { success = 1, message = "Успешно завершен раунд" });
@@ -528,7 +501,7 @@ namespace DiplomaWebApp.Controllers
             {
                 return Json(new { success = 0, message = "Игра не проходит в данный момент или уже закончилась" });
             }
-            currentGame.GameEnded = true;
+            currentGame.EndGame();
             gameRep.Save();
             return Json(new { success = 1, message = "Игра успешно закончена" });
         }
@@ -713,7 +686,7 @@ namespace DiplomaWebApp.Controllers
                 {
                     return Json(new { success = 0, message = "Отсутствие решения уже было зафиксировано" });
                 }
-                currentGame.Challenges.Last().Round.NoSolution = true;
+                currentGame.ConfirmNoSolution();
                 gameRep.Save();
                 return Json(new { success = 1, message = "Успешно зафиксировано отсутствие решения" });
             }

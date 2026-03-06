@@ -28,11 +28,11 @@ import GameInterface from "./Components/GameComponents/GameInterface";
 
 
 function App() {
-  const [isAuthenticated, setAuth] = useState<boolean>(false);
+  const [isAuthenticated, setAuth] = useState<boolean>(localStorage.getItem("authFlag") === "true");
   function ExecuteLogout(): void {
     Logout();
     setAuth(false)
-
+    localStorage.setItem("authFlag", "false");
   }
 
   return (

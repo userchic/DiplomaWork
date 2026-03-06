@@ -13,6 +13,7 @@ export default function GameInterface() {
     let gameId: number = parseInt(params.gameId)
     const [Challenges, setChallenges] = useState<Challenge[]>([])
     const [Game, setGame] = useState<Game>()
+    const [ShowingChallenge, setShowingChallenge] = useState<Challenge>()
     useEffect(() => {
         getGame()
     }, [])
@@ -38,7 +39,10 @@ export default function GameInterface() {
     async function endRound(gameId: number, challenge: Challenge, EndRoundRequest: EndRoundRequest): Promise<boolean> {
         const endRound = async () => {
             const res = await EndRound(gameId, EndRoundRequest)
-            alert(res.message)
+            if (res.message !== undefined)
+                alert(res.message)
+            else
+                alert(res.errors[0])
             let result: boolean = res.success
             if (res.success) {
                 Game.Team1Points += EndRoundRequest.Team1Points
@@ -64,6 +68,7 @@ export default function GameInterface() {
                         RequestingTeamId: Game.ChallengingTeamId,
                     })
                     setChallenges([...changedChallenges])
+                    setShowingChallenge(Challenges[Challenges.length - 1])
                 }
                 else
                     getGame();
@@ -74,7 +79,10 @@ export default function GameInterface() {
     }
     async function handleEndGame() {
         const res = await EndGame(gameId)
-        alert(res.message)
+        if (res.message !== undefined)
+            alert(res.message)
+        else
+            alert(Object.values(res.errors)[0])
         if (res.success) {
             getGame()
         }
@@ -97,30 +105,44 @@ export default function GameInterface() {
                     Очки: {Game?.Team2Points}
                 </div>
             </center>
-            {
-                Challenges?.map((round) =>
-                    <RoundInterface
-                        challenge={round}
-                        Game={Game}
-                        EndGame={handleEndGame}
-                        EndRound={endRound}
-                        RejectToChallenge={async () => {
-                            const res = await RejectToChallenge(gameId)
-                            alert(res.message)
-                            if (res.success) {
-                                if (Game.TeamRejectedToChallenge)
-                                    getGame()
-                                else {
-                                    Game.TeamRejectedToChallenge = true
-                                    SwapChallengingTeams()
-                                }
+            <div style={{ display: "flex" }}>
+                <div style={{ flex: 0.1 }}>
+                    {
+                        Challenges?.map((challenge, index) => {
+                            function handleShownRoundChange() {
+                                setShowingChallenge(challenge)
                             }
-                            let result: boolean = res.success
-                            return result
-                        }}
-                    />
-                )
-            }
+                            return <>
+                                <input type="button" onClick={handleShownRoundChange} value={"Раунд " + (index + 1)} /><br />
+                            </>
+                        }
+                        )
+                    }
+                </div>
+                <div style={{ flex: 1 }}>
+                    {ShowingChallenge !== null && ShowingChallenge !== undefined ?
+                        <RoundInterface
+                            challenge={ShowingChallenge}
+                            Game={Game}
+                            EndGame={handleEndGame}
+                            EndRound={endRound}
+                            RejectToChallenge={async () => {
+                                const res = await RejectToChallenge(gameId)
+                                alert(res.message)
+                                if (res.success) {
+                                    if (Game.TeamRejectedToChallenge)
+                                        getGame()
+                                    else {
+                                        Game.TeamRejectedToChallenge = true
+                                        SwapChallengingTeams()
+                                    }
+                                }
+                                let result: boolean = res.success
+                                return result
+                            }}
+                        /> : ""}
+                </div>
+            </div>
         </>
     )
 }

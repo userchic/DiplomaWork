@@ -1,17 +1,17 @@
-import { createContext,useState, type JSX } from "react";
+import { createContext, useState, type JSX } from "react";
 
 type AuthContextType = {
-    isAuthenticated:boolean;
-    setAuth: (auth:boolean)=>void
+    isAuthenticated: boolean;
+    setAuth: (auth: boolean) => void
 }
 const AuthContext = createContext<AuthContextType>({
-    isAuthenticated:false,
-    setAuth: () => {}
+    isAuthenticated: localStorage.getItem("authFlag") === "true",
+    setAuth: () => { }
 })
 
-export const AuthProvider = ({children}: {children:JSX.Element}) =>{
-    const [isAuthenticated,setAuth] = useState<boolean>(false)
-    return <AuthContext.Provider value={{isAuthenticated,setAuth}}>
+export const AuthProvider = ({ children }: { children: JSX.Element }) => {
+    const [isAuthenticated, setAuth] = useState<boolean>(localStorage.getItem("authFlag") === "true")
+    return <AuthContext.Provider value={{ isAuthenticated, setAuth }}>
         {children}
     </AuthContext.Provider>
 }

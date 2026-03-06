@@ -1,24 +1,24 @@
 import { Navigate, useNavigate } from "react-router"
-import {type Student} from "../Models/Student"
+import { type Student } from "../Models/Student"
 import { DeleteStudent } from "../Services/AdminService";
-interface Props{
-    student:Student;
-    handleDelete:(id:number)=>void;
+interface Props {
+    student: Student;
+    handleDelete: (id: number) => void;
 }
-export default function TaskCard({student,handleDelete}:Props)
-{
-    const navigate=useNavigate()
-    
+export default function TaskCard({ student, handleDelete }: Props) {
+    const navigate = useNavigate()
+
     function ShowStudent() {
-        navigate("/Student/"+student.Id)
+        navigate("/Student/" + student.Id)
     }
-    function Delete()
-    {
-        let res=DeleteStudent(student.Id);
-        
-        res.then(result=>{
-            if (result.success===1)
+    function Delete() {
+        let res = DeleteStudent(student.Id);
+
+        res.then(result => {
+            if (result.success !== undefined)
                 alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
             handleDelete(student.Id)
         })
     }
@@ -37,10 +37,10 @@ export default function TaskCard({student,handleDelete}:Props)
                 {student.Email}
             </td>
             <td>
-                <input type="button" value="Подробнее" onClick={ShowStudent}/>
+                <input type="button" value="Подробнее" onClick={ShowStudent} />
             </td>
             <td>
-                <input type="button" value="Удалить" onClick={()=>Delete()}/>
+                <input type="button" value="Удалить" onClick={() => Delete()} />
             </td>
         </>
     )

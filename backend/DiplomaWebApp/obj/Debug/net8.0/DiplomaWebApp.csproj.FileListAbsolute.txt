@@ -204,3 +204,6 @@ C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Microsoft.Extensions.AI.Abstractions.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Mistral.SDK.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\MistralBasedTaskTextGenerator.dll
+C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Prometheus.NetStandard.dll
+C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Prometheus.AspNetCore.dll
+C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Prometheus.AspNetCore.HealthChecks.dll

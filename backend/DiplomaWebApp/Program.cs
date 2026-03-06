@@ -2,6 +2,8 @@ using DiplomaWebApp.Abstractions;
 using DiplomaWebApp.DataBase;
 using DiplomaWebApp.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
+using System.Diagnostics;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,6 +28,7 @@ builder.Services.AddCors(x => x.AddPolicy("AllowOneOrigin", x =>
     x.AllowCredentials();
 }));
 builder.Services.AddAuthorization();
+
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IJureRepository, JureRepository>();
@@ -60,6 +63,8 @@ app.UseCors(x => {
     x.AllowCredentials();
 });
 app.UseHttpsRedirection();
+app.UseMetricServer();
+app.UseHttpMetrics();
 
 app.UseAuthorization();
 app.UseAuthentication();

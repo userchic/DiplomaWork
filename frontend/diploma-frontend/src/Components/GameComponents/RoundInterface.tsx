@@ -51,14 +51,17 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                 }
             }
         }
-    }, []
+    }
     )
 
     function ChallengeCall(TaskId: number) {
         const fixateChallenge = async () => {
-            const res = await FixateChallenge(Game.Id, TaskId)
-            alert(res.message)
-            if (res.success) {
+            const result = await FixateChallenge(Game.Id, TaskId)
+            if (result.success !== undefined)
+                alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
+            if (result.success) {
                 challenge.TaskId = TaskId
                 challenge.Task = Game.Tasks.$values.find((task) => task.Id == TaskId)
                 challenge.DeclareTime = new Date()
@@ -71,9 +74,12 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
 
     function confirmCorrectnessCheck() {
         const confirmCorrectness = async () => {
-            const res = await ConfirmCorrectnessCheck(Game.Id)
-            alert(res.message)
-            if (res.success) {
+            const result = await ConfirmCorrectnessCheck(Game.Id)
+            if (result.success !== undefined)
+                alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
+            if (result.success) {
                 challenge.IsCheckingCorrectness = true
                 return true
             }
@@ -84,9 +90,12 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
     }
     async function confirmChallengeAcceptance() {
         const confirmAcceptance = async () => {
-            const res = await ConfirmChallengeAcceptance(Game.Id)
-            alert(res.message)
-            if (res.success) {
+            const result = await ConfirmChallengeAcceptance(Game.Id)
+            if (result.success !== undefined)
+                alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
+            if (result.success) {
                 challenge.IsChallengeAccepted = true
                 return true
             }
@@ -101,7 +110,10 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                 OpponentId: OpponentId,
                 SpeakerId: SpeakerId,
             })
-            alert(res.message)
+            if (res.success !== undefined)
+                alert(res.message)
+            else
+                alert(Object.values(res.errors)[0])
             let result: boolean = res.success
             if (result) {
                 let Students = Game.Team1.Students.$values.concat(Game.Team2.Students.$values)
@@ -130,7 +142,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
 
     return (
         <>
-            <h2>Раунд{Game.Challenges.$values.indexOf(challenge) + 1}</h2>
+            <h2>Раунд{Game?.Challenges.$values.indexOf(challenge) + 1}</h2>
             {
                 State == "Challenge" ?
                     <>
@@ -193,7 +205,10 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                         isCheckingCorrectness={challenge.IsCheckingCorrectness}
                         ConfirmNoSolution={async () => {
                             const res = await ConfirmNoSolution(Game.Id)
-                            alert(res.message)
+                            if (res.success !== undefined)
+                                alert(res.message)
+                            else
+                                alert(Object.values(res.errors)[0])
                             if (res.success) {
                                 challenge.Round.NoSolution = true
                             }
@@ -202,7 +217,10 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                         }
                         DeclareRolesChange={async (isFullChange) => {
                             const res = await DeclareRoleChange(Game.Id, isFullChange)
-                            alert(res.message)
+                            if (res.success !== undefined)
+                                alert(res.message)
+                            else
+                                alert(Object.values(res.errors)[0])
                             if (res.success) {
                                 challenge.Round.RolesChange = {
                                     ChangeTime: new Date(),
@@ -237,7 +255,10 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                         }
                         DeclareChange={async (RequestingTeamId, NewParticipantId) => {
                             let res = await DeclareChange(Game.Id, RequestingTeamId, NewParticipantId)
-                            alert(res.message)
+                            if (res.success !== undefined)
+                                alert(res.message)
+                            else
+                                alert(Object.values(res.errors)[0])
                             if (res.success) {
                                 let initiatorTeam = Game.Team1Id == RequestingTeamId ? Game.Team1 : Game.Team2
                                 let currentParticipantId = initiatorTeam.Students.$values.find((student) => student.Id == challenge.Round.OpponentId) === undefined ? challenge.Round.SpeakerId : challenge.Round.OpponentId
@@ -253,7 +274,10 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                         }}
                         DeclareBreak={async (RequestingTeamId) => {
                             let res = await DeclareBreak(Game.Id, RequestingTeamId)
-                            alert(res.message)
+                            if (res.success !== undefined)
+                                alert(res.message)
+                            else
+                                alert(Object.values(res.errors)[0])
                             if (res.success) {
                                 challenge.Round.Breaks.$values.push({
                                     InitiatorTeamId: RequestingTeamId,

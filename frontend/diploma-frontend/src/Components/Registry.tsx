@@ -20,10 +20,14 @@ export default function Registry() {
         res.then(result => {
             if (result.success === 1) {
                 setAuth(true)
+                localStorage.setItem("authFlag", "true");
                 navigate("/Games")
             }
             else
-                setMessage(result.message)
+                if (result.message !== undefined)
+                    setMessage(result.message)
+                else
+                    setMessage(Object.values(result.errors)[0])
         })
 
     }

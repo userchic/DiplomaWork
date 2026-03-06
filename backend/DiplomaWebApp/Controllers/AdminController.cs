@@ -33,9 +33,9 @@ namespace DiplomaWebApp.Controllers
         }
         #region Get Запросы
         [HttpGet]
-        public IActionResult GetGames()
+        public IActionResult GetGames(int page=1)
         {
-            List<Game> games = gameRep.GetGames().ToList();
+            List<Game> games = gameRep.GetGames(page).ToList();
             string res = JsonSerializer.Serialize(games, new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve });
             return Json(res);
         }
@@ -135,7 +135,7 @@ namespace DiplomaWebApp.Controllers
         public IActionResult GenerateTask(TaskGenerateRequestRecord newTask)
         {
             //нужно написать ключ перед использованием
-            string ApiKey = "sitPREo7rAV51ob6jU2OtPFtPgqweak9";
+            string ApiKey = "vBAWprUM56jNWVI6q0v5zGbspznHsbAz";
             try
             {
                 MistralAPIBasedTextGenerator.MistralAPIBasedTextGenerator.InitializeClient(ApiKey);

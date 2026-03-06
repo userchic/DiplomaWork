@@ -15,8 +15,10 @@ export default function TaskCard({ task, handleDelete }: Props) {
         let res = DeleteTask(task.Id);
 
         res.then(result => {
-            if (result.success === 1)
+            if (result.success !== undefined)
                 alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
             handleDelete(task.Id)
         })
     }

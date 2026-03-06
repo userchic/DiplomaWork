@@ -14,9 +14,13 @@ export default function LoginSection() {
         let res = Login(login, password);
 
         res.then(result => {
-            alert(result.message)
+            if (result.message !== undefined)
+                setMessage(result.message)
+            else
+                setMessage(Object.values(result.errors)[0])
             if (result.success === 1) {
                 setAuth(true)
+                localStorage.setItem("authFlag", "true");
                 navigate("/Games")
             }
         })

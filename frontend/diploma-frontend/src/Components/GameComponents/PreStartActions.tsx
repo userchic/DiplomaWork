@@ -18,7 +18,10 @@ export default function PreStartActions() {
     function EmailSendTasks(): void {
         const send = async () => {
             const tasks = await SendTasks(gameId)
-            alert(tasks.message)
+            if (tasks.success !== undefined)
+                alert(tasks.message)
+            else
+                alert(Object.values(tasks.errors)[0])
         }
         send()
     }

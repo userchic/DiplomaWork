@@ -20,7 +20,10 @@ export default function StudentCreator() {
 
         let res = CreateStudent(newStudent)
         res.then(result => {
-            alert(result.message)
+            if (result.message !== undefined)
+                alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
         })
     }
     function handleNameChange(event: ChangeEvent<HTMLInputElement>) {

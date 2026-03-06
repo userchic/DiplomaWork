@@ -8,7 +8,10 @@ export default function GameStartConfirmation() {
     function Confirm(): void {
         const confirmStart = async () => {
             const res = await ConfirmStart(gameId)
-            alert(res.message)
+            if (res.message !== undefined)
+                alert(res.message)
+            else
+                alert(Object.values(res.errors)[0])
             if (res.success)
                 navigate("/PreStartActions/" + gameId)
         }

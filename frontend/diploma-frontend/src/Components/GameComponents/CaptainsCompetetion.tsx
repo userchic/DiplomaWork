@@ -38,7 +38,10 @@ export default function CaptainsCompetetion() {
     function ChooseTeam1(): void {
         const setWinner = async () => {
             const res = await SetCaptainsRoundWinner(gameId, Team1Id)
-            alert(res.message)
+            if (res.message !== undefined)
+                alert(res.message)
+            else
+                alert(Object.values(res.errors)[0])
             if (res.success)
                 navigate("/GameInterface/" + gameId)
         }
@@ -48,7 +51,10 @@ export default function CaptainsCompetetion() {
     function ChooseTeam2(): void {
         const setWinner = async () => {
             const res = await SetCaptainsRoundWinner(gameId, Team2Id)
-            alert(res.message)
+            if (res.message !== undefined)
+                alert(res.message)
+            else
+                alert(Object.values(res.Errors)[0])
             if (res.success)
                 navigate("/GameInterface/" + gameId)
         }

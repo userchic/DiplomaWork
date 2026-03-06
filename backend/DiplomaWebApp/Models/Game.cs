@@ -1,4 +1,5 @@
-﻿using DiplomaWebApp.ValidationAttributes;
+﻿using DiplomaWebApp.Records;
+using DiplomaWebApp.ValidationAttributes;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -36,7 +37,80 @@ namespace DiplomaWebApp.Models
 
         [ForeignKey("Team2Id")]
         public Team Team2 { get; set; }
-        public bool IsSolvingHasEnded()
+        public void ConfirmStart(Jure requestingUser)
+        {
+            Assessor = requestingUser;
+            StartTime = DateTime.UtcNow;
+        }
+        public void SetCaptainsRoundWinner(int winnerTeamId)
+        {
+            CaptainsRound round = new CaptainsRound()
+            {
+                GameId = Id,
+                Participant1Id = Team1.CaptainId,
+                Participant2Id = Team2.CaptainId,
+                WinnerId = winnerTeamId
+            };
+            ChallengingTeamId = winnerTeamId;
+            CaptainsRound = round;
+        }
+        public void ConfirmSolvingStart()
+        {
+            TaskSolvingStartTime = DateTime.UtcNow;
+        }
+
+        public void FixateChallenge(int taskId)
+        {
+            Challenges.Add(new Challenge()
+            {
+                GameId = Id,
+                DeclareTime = DateTime.UtcNow,
+                RequestingTeamId = ChallengingTeamId.Value,
+                TaskId = taskId,
+            });
+        }
+        public void FixateChallengeRejection()
+        {
+            ChallengingTeamId = Team2Id + Team1Id - ChallengingTeamId;
+            TeamRejectedToChallenge = true;
+        }
+        public void FixateCorrectnessCheck()
+        {
+            Challenges.Last().IsCheckingCorrectness = true;
+        }
+        public void FixateChallengeAcceptance()
+        {
+            Challenges.Last().IsChallengeAccepted = true;
+        }
+        public void StartRound(Round newRound)
+        {
+            Challenges.Last().Round = newRound;
+        }
+        public void EndRound(RoundResults newRes,EndRoundRecord record)
+        {
+            Team1Points += record.Team1Points;
+            Team2Points += record.Team2Points;
+            Challenges.Last().Round.RoundResults = newRes;
+
+            if (newRes.Correctness && !TeamRejectedToChallenge)
+            {
+                ChallengingTeamId = Team2Id + Team1Id - ChallengingTeamId;
+            }
+
+            List<Mistake> newMistakes = record.Mistakes.Select(x => new Mistake(x)).ToList();
+            newMistakes.ForEach(x => x.ResultsId = newRes.Id);
+            Challenges.Last().Round.RoundResults.Mistakes = newMistakes;
+        }
+        public void EndGame()
+        {
+            GameEnded = true;
+        }
+        public void ConfirmNoSolution()
+        {
+            Challenges.Last().Round.NoSolution = true;
+        }
+
+        internal bool IsSolvingHasEnded()
         {
             return TaskSolvingStartTime.HasValue && DateTime.Now > TaskSolvingStartTime.Value.ToLocalTime().AddMinutes(SolvingTime); 
         }
@@ -46,7 +120,6 @@ namespace DiplomaWebApp.Models
                 return true;
             return false;
         }
-
         internal bool Ongoing()
         {
             return !GameEnded && StartTime is not null;

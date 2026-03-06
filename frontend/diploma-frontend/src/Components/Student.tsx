@@ -34,7 +34,10 @@ export default function Student() {
 
         let res = UpdateStudent(updatedStudent)
         res.then(result => {
-            alert(result.message)
+            if (result.success !== undefined)
+                alert(result.message)
+            else
+                alert(Object.values(result.errors)[0])
         })
     }
     function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
