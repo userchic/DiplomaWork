@@ -13,6 +13,7 @@ namespace DiplomaWebApp.Models
         
         public string Name { get; set; } = "";
         
+        public DateTime? PlannedStartTime { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? TaskSolvingStartTime { get; set; }
         public int SolvingTime { get; set; }
@@ -22,6 +23,7 @@ namespace DiplomaWebApp.Models
         public int Team1Points { get; set; }
         public int Team2Points { get; set; }
         public string CaptainsRoundFormat { get; set; }
+        public string EventPlace { get; set; }
         public string? AssessorId { get; set; }
         public bool GameEnded { get; set; } = false;
         public int? ChallengingTeamId { get; set; }
@@ -42,6 +44,10 @@ namespace DiplomaWebApp.Models
             Assessor = requestingUser;
             StartTime = DateTime.UtcNow;
         }
+        public void ConfirmSolvingStart()
+        {
+            TaskSolvingStartTime = DateTime.UtcNow;
+        }
         public void SetCaptainsRoundWinner(int winnerTeamId)
         {
             CaptainsRound round = new CaptainsRound()
@@ -54,10 +60,7 @@ namespace DiplomaWebApp.Models
             ChallengingTeamId = winnerTeamId;
             CaptainsRound = round;
         }
-        public void ConfirmSolvingStart()
-        {
-            TaskSolvingStartTime = DateTime.UtcNow;
-        }
+
 
         public void FixateChallenge(int taskId)
         {

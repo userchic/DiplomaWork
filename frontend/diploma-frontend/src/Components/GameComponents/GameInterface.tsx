@@ -65,10 +65,8 @@ export default function GameInterface() {
                         GameId: Game.Id,
                         IsCheckingCorrectness: false,
                         IsChallengeAccepted: false,
-                        RequestingTeamId: Game.ChallengingTeamId,
                     })
                     setChallenges([...changedChallenges])
-                    setShowingChallenge(Challenges[Challenges.length - 1])
                 }
                 else
                     getGame();
@@ -91,8 +89,8 @@ export default function GameInterface() {
     return (
         <>
             <center>
-                <div style={{ display: "inline-block" }}>
-                    Команда 1: {Game?.Team1.Name} <br />
+                <div className={"block"} style={{ display: "inline-block", padding: "10px" }}>
+                    Команда 1: <b>"{Game?.Team1.Name}"</b> <br />
                     Очки: {Game?.Team1Points}
                 </div>
                 {
@@ -100,49 +98,67 @@ export default function GameInterface() {
                         <input type="button" value="Закончить игру" onClick={handleEndGame} /> :
                         null
                 }
-                <div style={{ display: "inline-block" }}>
-                    Команда 2: {Game?.Team2.Name} <br />
+                <div className={"block"} style={{ display: "inline-block", padding: "10px" }}>
+                    Команда 2: <b>"{Game?.Team2.Name}"</b> <br />
                     Очки: {Game?.Team2Points}
                 </div>
+                <br />
+                {Game?.GameEnded ? "Игра завершена" : null}
             </center>
-            <div style={{ display: "flex" }}>
-                <div style={{ flex: 0.1 }}>
-                    {
-                        Challenges?.map((challenge, index) => {
-                            function handleShownRoundChange() {
-                                setShowingChallenge(challenge)
-                            }
-                            return <>
-                                <input type="button" onClick={handleShownRoundChange} value={"Раунд " + (index + 1)} /><br />
-                            </>
-                        }
-                        )
-                    }
-                </div>
-                <div style={{ flex: 1 }}>
-                    {ShowingChallenge !== null && ShowingChallenge !== undefined ?
-                        <RoundInterface
-                            challenge={ShowingChallenge}
-                            Game={Game}
-                            EndGame={handleEndGame}
-                            EndRound={endRound}
-                            RejectToChallenge={async () => {
-                                const res = await RejectToChallenge(gameId)
-                                alert(res.message)
-                                if (res.success) {
-                                    if (Game.TeamRejectedToChallenge)
-                                        getGame()
-                                    else {
-                                        Game.TeamRejectedToChallenge = true
-                                        SwapChallengingTeams()
-                                    }
+
+            <br />
+            <div className={"block"} >
+                <h2>{Game?.Name}</h2>
+                <h4>Математический бой</h4>
+                {
+                    Game?.Team1.Id === Game?.CaptainsRound.WinnerId ?
+                        <div>
+                            Команда <b>{Game?.Team1.Name}</b> победитель в <b>капитанском раунде</b>
+                        </div>
+                        :
+                        <div>
+                            Команда <b>{Game?.Team2.Name}</b> победитель в <b>капитанском раунде</b>
+                        </div>
+                }
+                <div style={{ display: "flex" }}>
+                    <div className={"block"} style={{ flex: 0.1 }}>
+                        {
+                            Challenges?.map((challenge, index) => {
+                                function handleShownRoundChange() {
+                                    setShowingChallenge(challenge)
                                 }
-                                let result: boolean = res.success
-                                return result
-                            }}
-                        /> : ""}
-                </div>
-            </div>
+                                return <>
+                                    <input key={index} type="button" onClick={handleShownRoundChange} value={"Раунд " + (index + 1)} /><br />
+                                </>
+                            }
+                            )
+                        }
+                    </div>
+                    <div className={"block"} style={{ flex: 1 }}>
+                        {ShowingChallenge !== null && ShowingChallenge !== undefined ?
+                            <RoundInterface
+                                challenge={ShowingChallenge}
+                                Game={Game}
+                                EndGame={handleEndGame}
+                                EndRound={endRound}
+                                RejectToChallenge={async () => {
+                                    const res = await RejectToChallenge(gameId)
+                                    alert(res.message)
+                                    if (res.success) {
+                                        if (Game.TeamRejectedToChallenge)
+                                            getGame()
+                                        else {
+                                            Game.TeamRejectedToChallenge = true
+                                            SwapChallengingTeams()
+                                        }
+                                    }
+                                    let result: boolean = res.success
+                                    return result
+                                }}
+                            /> : ""}
+                    </div>
+                </div >
+            </div >
         </>
     )
 }

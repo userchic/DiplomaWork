@@ -20,6 +20,10 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
 
     const [State, setState] = useState("")
     useEffect(() => {
+        UpdateState()
+    }
+    )
+    function UpdateState() {
         if (Game.GameEnded) {
             setState("info")
         }
@@ -52,8 +56,6 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
             }
         }
     }
-    )
-
     function ChallengeCall(TaskId: number) {
         const fixateChallenge = async () => {
             const result = await FixateChallenge(Game.Id, TaskId)
@@ -142,6 +144,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
 
     return (
         <>
+
             <h2>Раунд{Game?.Challenges.$values.indexOf(challenge) + 1}</h2>
             {
                 State == "Challenge" ?
@@ -197,6 +200,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                 State == "MainPart" ?
                     <MainPartInterface
                         setState={setState}
+                        challenge={challenge}
                         Team1={Game.Team1}
                         Team2={Game.Team2}
                         speakerId={challenge.Round?.SpeakerId}
@@ -227,6 +231,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                                     FullRoleChange: isFullChange
                                 }
                             }
+                            return res.success
                         }
                         }
                         EndRound={
@@ -271,6 +276,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                                     InitiatorTeam: initiatorTeam
                                 })
                             }
+                            return res.success
                         }}
                         DeclareBreak={async (RequestingTeamId) => {
                             let res = await DeclareBreak(Game.Id, RequestingTeamId)
@@ -285,6 +291,7 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                                     DeclareTime: new Date()
                                 })
                             }
+                            return res.success
                         }}
                     />
                     : null

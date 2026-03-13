@@ -17,6 +17,7 @@ export default function ChallengeAcceptanceInterface({ setState, ConfirmCorrectn
 
     return (
         <>
+            <h3>Вызов принят?</h3>
             <input type="button" value="Подтвердить принятие вызова" onClick={handleCallAccept} />
             <br />
             <input type="button" value="Зафиксировать проверку корректности" onClick={handleCheckingCorrectnessConfirmation} />

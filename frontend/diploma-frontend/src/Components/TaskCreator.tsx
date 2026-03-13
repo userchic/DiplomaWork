@@ -4,10 +4,10 @@ import { type Task } from "../Models/Task"
 import { useNavigate } from "react-router";
 import { subjectTopics, type ISubject } from "../Models/SubjectTopics"
 import { GenerateTask } from "../Services/AdminService"
+import TextArea from "antd/es/input/TextArea";
 
 export default function TaskCreator() {
     const [text, setText] = useState<string>("")
-    const navigate = useNavigate();
     const [TaskAmount, setTaskAmount] = useState(0)
     const [Subject, setSubject] = useState("")
     const [Topic, setTopic] = useState("")
@@ -75,54 +75,73 @@ export default function TaskCreator() {
         setText(event.target.value)
     }
     let style = { height: '100px', width: '400px' }
-    function NavToTaskGeneration(): void {
-        navigate("/TaskGenerator")
-    }
+
 
     return (
         <>
             <h1>Создание задач</h1>
             <div>
-                Текст:<input type="text" style={style} value={text} onChange={handleTextChange} /><br />
+                Текст:<TextArea rows={5} value={text} onChange={handleTextChange} /><br />
                 <input style={{ flex: 1, alignSelf: "flex-start" }} type="button" value="Создать задачу" onClick={Create} />
-                <input style={{ flex: 1, marginLeft: "140px" }} type="button" value="Перейти к генерации задач" onClick={NavToTaskGeneration} />
             </div>
+            <h3>Атрибуты для генерации задач</h3>
+            <div style={{ display: "inline-block" }}>
+                <div className="inputLabel">
+                    Кол-во задач:
+                </div>
+                <div className="inputLabel">
+                    Предмет:
+                </div>
+                <div className="inputLabel">
+                    Тема:
+                </div>
+                <div className="inputLabel">
+                    Размер задачи:
+                </div>
+                <div className="inputLabel">
+                    Количество вопросов:
+                </div>
+                <div className="inputLabel">
+                    Ответ:
+                </div>
+            </div>
+            <div style={{ display: "inline-block" }}>
+                <input className="input" type="number" value={TaskAmount} onChange={handleTaskAmountChange} /><br />
+                <select className="input" value={Subject} onChange={handleSubjectChange}>
+                    <option value="" />
+                    {
+                        subjectTopics.map(subject => {
+                            return (
+                                <option key={subject.Subject} value={subject.Subject}>{subject.Subject}</option>
+                            )
+                        })
 
-            Кол-во задач: <input type="number" value={TaskAmount} onChange={handleTaskAmountChange} /><br />
-            Предмет:<select value={Subject} onChange={handleSubjectChange}>
-                <option value="" />
-                {
-                    subjectTopics.map(subject => {
-                        return (
-                            <option key={subject.Subject} value={subject.Subject}>{subject.Subject}</option>
-                        )
-                    })
+                    }
+                </select><br />
+                <select className="input" value={Topic} onChange={handleTopicChange}>
+                    <option value="" />
+                    {
+                        currentSubject.Topics.map(topicName => {
+                            return (
+                                <option value={topicName}>{topicName}</option>
+                            )
+                        })
+                    }
 
-                }
-            </select><br />
-            Тема:<select value={Topic} onChange={handleTopicChange}>
-                <option value="" />
-                {
-                    currentSubject.Topics.map(topicName => {
-                        return (
-                            <option value={topicName}>{topicName}</option>
-                        )
-                    })
-                }
-
-            </select><br />
-            Размер задачи:<select value={TaskSize} onChange={handleTaskSizeChange}>
-                <option value="" />
-                <option value="Большой">Большой</option>
-                <option value="Средний">Средний</option>
-                <option value="Маленький">Маленький</option>
-            </select><br />
-            Количество вопросов:<input type="number" value={QuestionsAmount} onChange={handleQuestionsAmountChange} /><br />
-            Ответ:<select value={Answer} onChange={handleAnswerChange}>
-                <option value="" />
-                <option value="С красивым значением">С красивым значением</option>
-                <option value="С некрасивым значением">С некрасивым значением</option>
-            </select>
+                </select><br />
+                <select className="input" value={TaskSize} onChange={handleTaskSizeChange}>
+                    <option value="" />
+                    <option value="Большой">Большой</option>
+                    <option value="Средний">Средний</option>
+                    <option value="Маленький">Маленький</option>
+                </select><br />
+                <input className="input" type="number" value={QuestionsAmount} onChange={handleQuestionsAmountChange} /><br />
+                <select className="input" value={Answer} onChange={handleAnswerChange}>
+                    <option value="" />
+                    <option value="С красивым значением">С красивым значением</option>
+                    <option value="С некрасивым значением">С некрасивым значением</option>
+                </select>
+            </div><br />
             <input type="button" value="Сгенерировать текст задачи" onClick={handleTaskGenerate} />
         </>
     )

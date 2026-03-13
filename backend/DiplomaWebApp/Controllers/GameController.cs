@@ -436,6 +436,7 @@ namespace DiplomaWebApp.Controllers
                 StartTime = DateTime.UtcNow,
                 ChallengeId = currentGame.Challenges.Last().Id,
                 RoundNumber = currentGame.Challenges.Count,
+                Number = currentGame.Challenges.Count,
             };
             roundRep.AddRound(newRound);
             roundRep.Save();

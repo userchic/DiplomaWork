@@ -18,7 +18,6 @@ import Students from "./Components/Students";
 import Student from "./Components/Student";
 import TaskCreator from "./Components/TaskCreator";
 import StudentCreator from "./Components/StudentCreator";
-import TaskGenerator from "./Components/TaskGenerator";
 import GameCreator from "./Components/GameCreator";
 import GameStartConfirmation from "./Components/GameComponents/GameStartConfirmation";
 import PreStartActions from "./Components/GameComponents/PreStartActions";
@@ -43,13 +42,15 @@ function App() {
         <Menu theme="dark"
           mode="horizontal"
           items={isAuthenticated ? [
+            { key: "siteName", label: <Link to={"/"}>Математические бои</Link> },
             { key: "games", label: <Link to={"/Games"}>Бои</Link> },
             { key: "tasks", label: <Link to={"/Tasks"}>Задачи</Link> },
             { key: "students", label: <Link to={"/Students"}>Студенты</Link> },
             { key: "logout", label: <input type="button" onClick={ExecuteLogout} value="Выход" /> },
           ] : [
+            { key: "siteName", label: <Link to={"/"}>Математические бои</Link> },
             { key: "login", label: <Link to={"/Login"}>Вход</Link> },
-            { key: "Registry", label: <Link to={"/Registry"}>Регистрация</Link> },
+            { key: "registry", label: <Link to={"/Registry"}>Регистрация</Link> },
 
           ]}
           style={{ flex: 1, minWidth: 0 }}
@@ -71,7 +72,6 @@ function App() {
               <Route path="/Task/:id" element={<Task />} />
               <Route path="/Tasks" element={<Tasks />} />
               <Route path="/TaskCreate" element={<TaskCreator />} />
-              <Route path="/TaskGenerator" element={<TaskGenerator />} />
               <Route path="/Student/:id" element={<Student />} />
               <Route path="/Students" element={<Students />} />
               <Route path="/StudentCreate" element={<StudentCreator />} />

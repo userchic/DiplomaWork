@@ -2,6 +2,8 @@ import { useState } from "react"
 import type { Challenge } from "../../Models/Challenge"
 import type { Round } from "../../Models/Round"
 import type { Team } from "../../Models/Team"
+import ChangesInfo from "./ChangesInfo"
+import BreaksInfo from "./BreaksInfo"
 
 interface Props {
     Challenge: Challenge,
@@ -20,159 +22,146 @@ export default function infoInterface({ Challenge, Team1, Team2 }: Props) {
 
     return (
         <>
-            <h3> Описание Раунда</h3>
-            Задача:{Challenge.Task?.Text}<br />
-            Проверка корректности: {Challenge.IsCheckingCorrectness ? "да" : "нет"}<br />
-            {Round !== null && Round !== undefined ? <>
-                Изначальный Докладчик:{Round.Speaker?.Surname} {Round?.Speaker?.Name} {Round.Speaker?.Fatname} Email:{Round?.Speaker?.Email}<br />
-                Команда Докладчика: {SpeakerTeam?.Name}<br />
-                Изначальный Оппонент:{Round?.Opponent?.Surname} {Round?.Opponent?.Name} {Round.Opponent?.Fatname} Email:{Round?.Opponent?.Email}<br />
-                Команда Оппонента: {OpponentTeam?.Name}<br />
-                <br />
-                {
-                    Round.RolesChange !== null && Round.RolesChange !== undefined ?
-                        <>
-                            Произошла {Round.RolesChange.FullRoleChange ? "полная" : "частичная"} перемена ролей<br />
-                            Время перемены ролей: {Round.RolesChange.ChangeTime}
-                        </>
-                        : null
-                }<br />
-                Вызов был {Round.RoundResults?.Correctness ? "Корректным" : "Некорректным"}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                Описание ошибки
-                            </th>
-                            <th>
-                                Баллы жюри
-                            </th>
-                            <th>
-                                Баллы оппонента
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Round.RoundResults?.Mistakes.$values.map((mistake) => {
-                            return (
-                                <tr>
-                                    <td>
-                                        {mistake.Text}
+            <h3> Описание хода раунда</h3>
+            <b>Задача:</b> {Challenge.Task?.Text}<br />
+            <b>Проверка корректности:</b> {Challenge.IsCheckingCorrectness ? "да" : "нет"}<br />
+            Вызов был <b>{Round?.RoundResults?.Correctness ?
+                "Корректным" :
+                "Некорректным"}</b>
+            {Round !== null && Round !== undefined ?
+                <>
+
+                    <h3>Выступающие</h3>
+                    <table style={{ width: "40%" }} className="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Роль
+                                </th>
+                                <th>
+                                    Выступающий
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Команда
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Докладчик
+                                </td>
+                                <td>
+                                    {Round?.Speaker?.Surname} {Round?.Speaker?.Name} {Round?.Speaker?.Fatname}
+                                </td>
+                                <td>
+                                    {Round?.Speaker?.Email}
+                                </td>
+                                <td>
+                                    {SpeakerTeam?.Name}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Оппонент
+                                </td>
+                                <td>
+                                    {Round?.Opponent?.Surname} {Round?.Opponent?.Name} {Round?.Opponent?.Fatname}
+                                </td>
+                                <td>
+                                    {Round?.Opponent?.Email}
+                                </td>
+                                <td>
+                                    {OpponentTeam?.Name}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style={{ display: "flex" }}>
+                        <div style={{ flex: "1" }}>
+                            <h3>Баллы команд</h3>
+                            <table style={{ width: "40%" }} className="table">
+                                <thead >
+                                    <tr>
+                                        <th>
+                                            Команда "{Team1.Name}"
+                                        </th>
+                                        <th>
+                                            Команда "{Team2.Name}"
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <td >
+                                        {Round.RoundResults?.Team1Points}
                                     </td>
                                     <td>
-                                        {mistake.JureCost}
+                                        {Round.RoundResults?.Team2Points}
                                     </td>
-                                    <td>
-                                        {mistake.OpponentsCost}
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-                Очки первой команды:{Round.RoundResults?.Team1Points}                Очки второй команды:{Round.RoundResults?.Team2Points}<br />
-                {
-                    Round.Breaks.$values.length > 0 ?
-                        <>
-                            <h3>Перерывы объявленные в этом раунде</h3>
-                            <table>
+                                </tbody>
+                            </table>
+
+                            <br />
+                        </div>
+                        <div style={{ flex: "1" }}>
+                            <h3>Ошибки</h3>
+                            <table className="table" style={{ width: "40%" }}>
                                 <thead>
                                     <tr>
                                         <th>
-                                            Время объявления
+                                            Описание ошибки
                                         </th>
                                         <th>
-                                            Идентификатор команды инициализатора
+                                            Баллы жюри
                                         </th>
                                         <th>
-                                            Название попросившей перерыв команды
+                                            Баллы оппонента
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Round.Breaks.$values.map((Break) => {
+                                    {Round.RoundResults?.Mistakes.$values.map((mistake) => {
                                         return (
-                                            <>
-                                                <tr>
-                                                    <th>
-                                                        {Break.DeclareTime.toString()}
-                                                    </th>
-                                                    <th>
-                                                        {Break.InitiatorTeamId}
-                                                    </th>
-                                                    <th>
-                                                        {Break.InitiatorTeam.Name}
-                                                    </th>
-                                                </tr>
-                                            </>
+                                            <tr>
+                                                <td>
+                                                    {mistake.Text}
+                                                </td>
+                                                <td>
+                                                    {mistake.JureCost}
+                                                </td>
+                                                <td>
+                                                    {mistake.OpponentsCost}
+                                                </td>
+                                            </tr>
                                         )
                                     })}
                                 </tbody>
                             </table>
-                        </>
-                        :
-                        <>
-                            Перерывов не произошло
-                        </>
-                }
-                <br />
-                {
-                    Round.Changes.$values.length > 0 ?
-                        <>
-                            <h3>Замены объявленные в этом раунде</h3>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Время объявления
-                                        </th>
-                                        <th>
-                                            Идентификатор команды инициализатора
-                                        </th>
-                                        <th>
-                                            Название попросившей перерыв команды
-                                        </th>
-                                        <th>
-                                            Идентификатор нового участника от указанной команды
-                                        </th>
-                                        <th>
-                                            Наименование участника
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Round.Changes.$values.map((Change) => {
-                                        return (
-                                            <>
-                                                <tr>
-                                                    <th>
-                                                        {Change.DeclareTime.toString()}
-                                                    </th>
-                                                    <th>
-                                                        {Change.InitiatorTeamId}
-                                                    </th>
-                                                    <th>
-                                                        {Change.InitiatorTeam.Name}
-                                                    </th>
-                                                    <th>
-                                                        {Change.NewParticipantId}
-                                                    </th>
-                                                    <th>
-                                                        {Change.NewParticipant.Surname} {Change.NewParticipant.Name} {Change.NewParticipant.Fatname}
-                                                    </th>
-                                                </tr>
-                                            </>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
-                        </>
-                        :
-                        <>
-                            Замен не произошло
-                        </>
-                }
-            </>
+                        </div>
+                    </div>
+                    <h3>События</h3>
+                    {
+                        Round.NoSolution ?
+                            "Зафиксировано отсутствие решения" :
+                            "Решение присутствует"
+                    }
+                    <br /><br />
+                    {
+                        Round.RolesChange !== null && Round.RolesChange !== undefined ?
+                            <>
+                                Произошла <b>{Round.RolesChange.FullRoleChange ? "полная" : "частичная"} перемена ролей </b><br />
+                                Время перемены ролей: {Round.RolesChange.ChangeTime}
+                            </>
+                            : "Не было перемены ролей"
+                    }
+                    <br /><br />
+                    <BreaksInfo Breaks={Round.Breaks} />
+                    <br /><br />
+                    <ChangesInfo Changes={Round.Changes} />
+                </>
                 : null
             }
         </>

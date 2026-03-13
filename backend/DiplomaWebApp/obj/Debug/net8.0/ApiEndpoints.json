@@ -225,12 +225,34 @@
   },
   {
     "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GetStudentInfo",
+    "RelativePath": "Admin/GetStudentInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
     "Method": "GetStudents",
     "RelativePath": "Admin/GetStudents",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -251,12 +273,34 @@
   },
   {
     "ContainingType": "DiplomaWebApp.Controllers.AdminController",
+    "Method": "GetTaskInfo",
+    "RelativePath": "Admin/GetTaskInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiplomaWebApp.Controllers.AdminController",
     "Method": "GetTasks",
     "RelativePath": "Admin/GetTasks",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

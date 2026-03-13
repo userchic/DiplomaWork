@@ -1,4 +1,5 @@
 
+import type { CaptainsRound } from "./CaptainsRound"
 import type { Challenge } from "./Challenge"
 import type { Task } from "./Task"
 import { type Team } from "./Team"
@@ -7,18 +8,20 @@ export interface Game {
     Name: String,
     StartTime: Date,
     TaskSolvingStartTime: Date,
-    SolvingTime: number
+    SolvingTime: number,
+    PlannedStartTime: Date,
     Team1Id: number,
     Team2Id: number,
     AssessorPoints: number,
     Team1Points: number,
     Team2Points: number,
     CaptainsRoundFormat: string,
+    EventPlace: string,
     AssessorId: number,
     GameEnded: Boolean,
     ChallengingTeamId: number,
     TeamRejectedToChallenge: boolean,
-    CaptainsRound: Object,
+    CaptainsRound: CaptainsRound,
     Team1: Team,
     Team2: Team,
     Tasks: { $values: Task[] }

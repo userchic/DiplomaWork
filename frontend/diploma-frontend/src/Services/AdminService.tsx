@@ -15,8 +15,8 @@ export const GetGames = async (page: number) => {
   return await response.json().then((data) => mapJson(JSON.parse(data).$values))
 }
 
-export const GetTasks = async () => {
-  let requestLine = hostName + "/" + controllerName + "/GetTasks"
+export const GetTasks = async (page: number) => {
+  let requestLine = hostName + "/" + controllerName + "/GetTasks" + "?page=" + page
   let response = await fetch(requestLine, {
     credentials: "include",
   })
@@ -29,8 +29,15 @@ export const GetTask = async (id: number) => {
   })
   return await response.json().then((data) => data)
 }
-export const GetStudents = async () => {
-  let requestLine = hostName + "/" + controllerName + "/GetStudents"
+export const GetTaskInfo = async (id: number) => {
+  let requestLine = hostName + "/" + controllerName + "/GetTaskInfo" + "?id=" + id
+  let response = await fetch(requestLine, {
+    credentials: "include",
+  })
+  return await response.json().then((data) => data)
+}
+export const GetStudents = async (page: number) => {
+  let requestLine = hostName + "/" + controllerName + "/GetStudents" + "?page=" + page
   let response = await fetch(requestLine, {
     credentials: "include",
   })
@@ -38,6 +45,13 @@ export const GetStudents = async () => {
 }
 export const GetStudent = async (id: number) => {
   let requestLine = hostName + "/" + controllerName + "/GetStudent" + "?id=" + id
+  let response = await fetch(requestLine, {
+    credentials: "include",
+  })
+  return await response.json().then((data) => data)
+}
+export const GetStudentInfo = async (id: number) => {
+  let requestLine = hostName + "/" + controllerName + "/GetStudentInfo" + "?id=" + id
   let response = await fetch(requestLine, {
     credentials: "include",
   })

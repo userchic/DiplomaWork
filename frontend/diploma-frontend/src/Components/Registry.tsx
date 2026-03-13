@@ -48,27 +48,41 @@ export default function Registry() {
     }
     return (
         <>
-            <h2>Регистрация</h2>
-            <div style={{ display: "inline-block" }}>
-                Имя*
-                <br />
-                Фамилия*
-                <br />
-                Отчество
-                <br />
-                Логин*
-                <br />
-                Пароль*
+            <div className="centering-parent">
+                <div className="block">
+                    <h2>Регистрация</h2>
+                    <div style={{ display: "inline-block" }}>
+                        Имя*
+                        <br />
+                        Фамилия*
+                        <br />
+                        Отчество
+                        <br />
+                        Логин*
+                        <br />
+                        Пароль*
+                    </div>
+                    <div style={{ display: "inline-block" }}>
+                        <div className="input">
+                            <input type="text" id="name" value={name} onChange={handleNameChange} /><br />
+                        </div>
+                        <div className="input">
+                            <input type="text" id="surname" value={surname} onChange={handleSurnameChange} /><br />
+                        </div>
+                        <div className="input">
+                            <input type="text" id="fatname" value={fatname} onChange={handleFatnameChange} /><br />
+                        </div>
+                        <div className="input">
+                            <input type="text" id="login" value={login} onChange={handleLoginChange} /><br />
+                        </div>
+                        <div className="input">
+                            <input type="password" id="password" value={password} onChange={handlePasswordChange} /><br />
+                        </div>
+                    </div>
+                    <div id="message">{message}</div>
+                    <input type="button" value="Зарегистрироваться" onClick={() => callRegistry()} />
+                </div>
             </div>
-            <div style={{ display: "inline-block" }}>
-                <input type="text" id="name" value={name} onChange={handleNameChange} /><br />
-                <input type="text" id="surname" value={surname} onChange={handleSurnameChange} /><br />
-                <input type="text" id="fatname" value={fatname} onChange={handleFatnameChange} /><br />
-                <input type="text" id="login" value={login} onChange={handleLoginChange} /><br />
-                <input type="password" id="password" value={password} onChange={handlePasswordChange} /><br />
-            </div>
-            <div id="message">{message}</div>
-            <input type="button" value="Зарегистрироваться" onClick={() => callRegistry()} />
         </>
     )
 }

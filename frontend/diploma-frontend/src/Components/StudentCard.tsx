@@ -37,6 +37,9 @@ export default function TaskCard({ student, handleDelete }: Props) {
                 {student.Email}
             </td>
             <td>
+                {student.EducationFacility}
+            </td>
+            <td>
                 <input type="button" value="Подробнее" onClick={ShowStudent} />
             </td>
             <td>

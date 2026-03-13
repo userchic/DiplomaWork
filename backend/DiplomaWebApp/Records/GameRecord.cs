@@ -17,7 +17,10 @@ namespace DiplomaWebApp.Records
         [Required(ErrorMessage ="Не выбраны задачи для игры")]
         [Remote(action: "CheckTasksExist", controller: "Admin", ErrorMessage = "Выбраны не существующие задачи")]
         public List<int> chosenTasksIds{get;set;}
-
+        [Required(ErrorMessage = "Не указано событие/место проведения")]
+        public string EventPlace { get;set;}
+        [Required(ErrorMessage ="Не указана дата запланированного начала боя")]
+        public DateTime PlannedStartTime { get; set; }
 
         [Required(ErrorMessage ="Не выбраны члены первой команды")]
         [MasRange(0,999,ErrorMessage ="Должен быть указан хотя бы один член первой команды")]

@@ -6,12 +6,15 @@ import { type Student } from "../Models/Student"
 export default function Students() {
     const [Loading, setLoading] = useState(true)
     const [students, setStudents] = useState<Student[]>([])
+    const [Page, setPage] = useState(1)
+    const getStudents = async () => {
+        const newStudents = await GetStudents(Page)
+        setStudents(students.concat(newStudents))
+        setLoading(false)
+        setPage(Page + 1)
+    }
+
     useEffect(() => {
-        const getStudents = async () => {
-            const students = await GetStudents()
-            setStudents(students)
-            setLoading(false)
-        }
         getStudents()
     }, [])
     function RemoveStudentCard(id: number) {
@@ -43,6 +46,9 @@ export default function Students() {
                                     Email
                                 </th>
                                 <th>
+                                    Обр. учреждение
+                                </th>
+                                <th>
 
                                 </th>
                                 <th>
@@ -59,6 +65,7 @@ export default function Students() {
 
                         </tbody>
                     </table>
+                    <input type="button" value="Ещё" onClick={getStudents} />
                 </>
             }
         </>

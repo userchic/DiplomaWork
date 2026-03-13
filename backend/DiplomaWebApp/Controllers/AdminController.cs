@@ -1,4 +1,5 @@
 ﻿using DiplomaWebApp.Abstractions;
+using DiplomaWebApp.DataBase;
 using DiplomaWebApp.Models;
 using DiplomaWebApp.Records;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +7,8 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory;
 using MistralAPIBasedTextGenerator;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -40,9 +42,9 @@ namespace DiplomaWebApp.Controllers
             return Json(res);
         }
         [HttpGet]
-        public IActionResult GetTasks()
+        public IActionResult GetTasks(int page=1)
         {
-            List<Problem> tasks = taskRep.GetTasks().ToList();
+            List<Problem> tasks = taskRep.GetTasks(page).ToList();
             return Json(JsonSerializer.Serialize(tasks));
         }
         [HttpGet]
@@ -54,15 +56,31 @@ namespace DiplomaWebApp.Controllers
             return Json(task);
         }
         [HttpGet]
-        public IActionResult GetStudents()
+        public IActionResult GetTaskInfo(int id)
         {
-            List<Student> students = studentRep.GetStudents().ToList();
+            Problem task = taskRep.GetTaskInfo(id);
+            if (task is null)
+                return NotFound();
+            return Json(task);
+        }
+        [HttpGet]
+        public IActionResult GetStudents(int page = 1)
+        {
+            List<Student> students = studentRep.GetStudents(page).ToList();
             return Json(JsonSerializer.Serialize(students));
         }
         [HttpGet]
         public IActionResult GetStudent(int id)
         {
             Student student = studentRep.GetStudent(id);
+            if (student is null)
+                return NotFound();
+            return Json(student);
+        }
+        [HttpGet]
+        public IActionResult GetStudentInfo(int id)
+        {
+            Student student = studentRep.GetStudentInfo(id);
             if (student is null)
                 return NotFound();
             return Json(student);
@@ -100,7 +118,9 @@ namespace DiplomaWebApp.Controllers
             {
                 Name= game.Name,
                 SolvingTime= game.SolvingTime,
+                PlannedStartTime = game.PlannedStartTime,
                 CaptainsRoundFormat = game.captainsRoundFormat,
+                EventPlace=game.EventPlace,
                 Tasks=tasks,
                 Team1=team1,
                 Team2=team2,
@@ -179,6 +199,7 @@ namespace DiplomaWebApp.Controllers
             dbStudent.Surname = changedStudent.Surname;
             dbStudent.Fatname = changedStudent.Fatname;
             dbStudent.Email = changedStudent.Email;
+            dbStudent.EducationFacility = changedStudent.EducationFacility;
             //studentRep.UpdateStudent(dbStudent);
             studentRep.Save();
             return Json(new { success = 1, message = "Успешно отредактирован студент" });

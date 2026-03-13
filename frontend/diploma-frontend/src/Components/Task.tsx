@@ -1,8 +1,9 @@
 import { useEffect, useState, type ChangeEvent } from "react"
-import { GetTask, UpdateTask } from "../Services/AdminService"
+import { GetTaskInfo, UpdateTask } from "../Services/AdminService"
 import { type Task } from "../Models/Task"
 import TaskCard from "./TaskCard"
 import { useParams } from "react-router"
+import TextArea from "antd/es/input/TextArea"
 export default function Task() {
     const [Loading, setLoading] = useState(true)
     const [text, setText] = useState<string>()
@@ -10,12 +11,12 @@ export default function Task() {
     useEffect(() => {
         if (typeof params.id == "string") {
             let id: number = parseInt(params['id'])
-            const getGames = async () => {
-                const task = await GetTask(id)
+            const getTasks = async () => {
+                const task = await GetTaskInfo(id)
                 setText(task.text)
                 setLoading(false)
             }
-            getGames()
+            getTasks()
         }
     }, [])
     function EditTask() {
@@ -46,7 +47,9 @@ export default function Task() {
                 </>
                 :
                 <>
-                    Текст: <input type="text" value={text} onChange={handleTextChange} />
+                    <div style={{ display: "flex" }}>
+                        Текст: <TextArea rows={5} cols={100} value={text} onChange={handleTextChange} />
+                    </div>
                     <input type="button" value="Отредактировать задачу" onClick={EditTask} />
                 </>
             }

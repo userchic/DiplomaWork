@@ -7,12 +7,11 @@ import type { Game } from "../Models/Game";
 export default function Games() {
     const [Loading, setLoading] = useState(true)
     const [games, setGames] = useState<Game[]>([])
-    const [IsEnd, setIsEnd] = useState(false)
+
     const [Page, setPage] = useState(1)
     const getGames = async () => {
         const newGames: Game[] = await GetGames(Page)
-        if (newGames.length == 0)
-            setIsEnd(true)
+
         setGames([...games.concat(newGames)])
         setLoading(false)
         setPage(Page + 1)
@@ -38,6 +37,18 @@ export default function Games() {
                                     Название игры
                                 </th>
                                 <th>
+                                    Статус
+                                </th>
+                                <th>
+                                    Ответственный за бой
+                                </th>
+                                <th>
+                                    Кол-во задач
+                                </th>
+                                <th>
+                                    Мероприятие/Место
+                                </th>
+                                <th>
                                     Кол-во участников
                                 </th>
                             </tr>
@@ -51,9 +62,8 @@ export default function Games() {
 
                         </tbody>
                     </table>
-                    {IsEnd ? null
-                        :
-                        <input type="button" value="Ещё" onClick={getGames} />}
+
+                    <input type="button" value="Ещё" onClick={getGames} />
                 </>
             }
         </>

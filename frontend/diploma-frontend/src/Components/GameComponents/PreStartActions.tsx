@@ -38,6 +38,7 @@ export default function PreStartActions() {
             <center><h2> Раздача задач</h2></center>
             <center><input type="button" onClick={EmailSendTasks} value="Отправить игрокам тексты задач" /></center>
             <center><input type="button" onClick={PrintDownloadTasks} value="Распечатать тексты задач" /></center>
+            <br />
             <center><input type="button" onClick={Confirm} value="Зафиксировать начало решения задач" /></center>
         </>
     )

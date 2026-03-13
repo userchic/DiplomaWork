@@ -1,0 +1,301 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\records\\gamerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\records\\gamerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\models\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\models\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\models\\round.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\models\\round.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\database\\mathbattlesdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\database\\mathbattlesdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\AppData\\Local\\SourceServer\\e6d3247e34bbfd208643dbd97effa677430764a8ca12d483a17bef7222d2387d\\backend\\DiplomaWebApp\\Repositories\\StudentRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\records\\studentrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\records\\studentrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\models\\problem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\models\\problem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\records\\jurerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\records\\jurerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\models\\jure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\models\\jure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\models\\mistake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\models\\mistake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\models\\captainsround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\models\\captainsround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|c:\\users\\\u0440\u0443\u0441\u043B\u0430\u043D \u0433\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\desktop\\diploma\\backend\\diplomawebapp\\repositories\\mistakerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354581F6-E784-43DB-8592-92930267F591}|DiplomaWebApp\\DiplomaWebApp.csproj|solutionrelative:diplomawebapp\\repositories\\mistakerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameRecord.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Records\\GameRecord.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Records\\GameRecord.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Records\\GameRecord.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Records\\GameRecord.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T10:37:31.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Round.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Round.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Models\\Round.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Round.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Models\\Round.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAgwBAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Game.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Game.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Models\\Game.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Game.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Models\\Game.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAlwA8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T16:20:37.378Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StudentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Repositories\\StudentRepository.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Repositories\\StudentRepository.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Repositories\\StudentRepository.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Repositories\\StudentRepository.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAcwCoAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Models\\Student.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Student.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Models\\Student.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAAFgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StudentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\AppData\\Local\\SourceServer\\e6d3247e34bbfd208643dbd97effa677430764a8ca12d483a17bef7222d2387d\\backend\\DiplomaWebApp\\Repositories\\StudentRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\e6d3247e34bbfd208643dbd97effa677430764a8ca12d483a17bef7222d2387d\\backend\\DiplomaWebApp\\Repositories\\StudentRepository.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\AppData\\Local\\SourceServer\\e6d3247e34bbfd208643dbd97effa677430764a8ca12d483a17bef7222d2387d\\backend\\DiplomaWebApp\\Repositories\\StudentRepository.cs [\u0422\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u0435\u043D\u0438\u0435]",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\e6d3247e34bbfd208643dbd97effa677430764a8ca12d483a17bef7222d2387d\\backend\\DiplomaWebApp\\Repositories\\StudentRepository.cs [\u0422\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u0435\u043D\u0438\u0435]",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAAAAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T07:40:40.801Z",
+              "EditorCaption": " [\u0422\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u0435\u043D\u0438\u0435]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GameController.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Controllers\\GameController.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Controllers\\GameController.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Controllers\\GameController.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Controllers\\GameController.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAApwKoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T17:44:22.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MathBattlesDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\DataBase\\MathBattlesDbContext.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\DataBase\\MathBattlesDbContext.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\DataBase\\MathBattlesDbContext.cs",
+              "RelativeToolTip": "DiplomaWebApp\\DataBase\\MathBattlesDbContext.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAQwC8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T16:33:36.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "StudentRecord.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Records\\StudentRecord.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Records\\StudentRecord.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Records\\StudentRecord.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Records\\StudentRecord.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T16:35:31.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Jure.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Jure.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Models\\Jure.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Jure.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Models\\Jure.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:58.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Repositories\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Repositories\\TaskRepository.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Repositories\\TaskRepository.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Repositories\\TaskRepository.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA1wCkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Problem.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Problem.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Models\\Problem.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Problem.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Models\\Problem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "JureRecord.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Records\\JureRecord.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Records\\JureRecord.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Records\\JureRecord.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Records\\JureRecord.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:58.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Mistake.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Mistake.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Models\\Mistake.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\Mistake.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Models\\Mistake.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CaptainsRound.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\CaptainsRound.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Models\\CaptainsRound.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Models\\CaptainsRound.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Models\\CaptainsRound.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.907Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MistakeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Repositories\\MistakeRepository.cs",
+              "RelativeDocumentMoniker": "DiplomaWebApp\\Repositories\\MistakeRepository.cs",
+              "ToolTip": "C:\\Users\\\u0420\u0443\u0441\u043B\u0430\u043D \u0413\u0430\u0431\u0437\u0430\u043B\u0438\u043B\u043E\u0432\\Desktop\\Diploma\\backend\\DiplomaWebApp\\Repositories\\MistakeRepository.cs",
+              "RelativeToolTip": "DiplomaWebApp\\Repositories\\MistakeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-10T08:47:57.915Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

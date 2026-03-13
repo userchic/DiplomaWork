@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "DiplomaWebApp",
     "version": "1.0"
@@ -33,6 +33,17 @@
         "tags": [
           "Admin"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -62,10 +73,43 @@
         }
       }
     },
+    "/Admin/GetTaskInfo": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Admin/GetStudents": {
       "get": {
         "tags": [
           "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -75,6 +119,28 @@
       }
     },
     "/Admin/GetStudent": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Admin/GetStudentInfo": {
       "get": {
         "tags": [
           "Admin"
@@ -1086,6 +1152,7 @@
         "required": [
           "captainsRoundFormat",
           "chosenTasksIds",
+          "eventPlace",
           "name",
           "solvingTime",
           "studentsTeam1",
@@ -1116,6 +1183,10 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          "eventPlace": {
+            "minLength": 1,
+            "type": "string"
           },
           "studentsTeam1": {
             "type": "array",
@@ -1274,6 +1345,10 @@
             "type": "string"
           },
           "fatname": {
+            "type": "string",
+            "nullable": true
+          },
+          "educationFacility": {
             "type": "string",
             "nullable": true
           },

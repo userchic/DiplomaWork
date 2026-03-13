@@ -15,6 +15,7 @@ namespace DiplomaWebApp.DataBase
 
         private void DropCreateDatabase()
         {
+            
             if (Database.EnsureCreated())
             {
                 Jures.AddRange(new Jure[]{
@@ -22,20 +23,13 @@ namespace DiplomaWebApp.DataBase
                 new Jure(){ Name="Николас",Surname="Вольфгангович",Fatname="Amodeus",Login="NWA",Password="1234"},
                 });
                 Students.AddRange(new Student[] {
-                new Student(){Name="Никита", Surname="Рудик",Fatname="Витальевич", Email=""},
-                new Student(){Name="Вася", Surname="Васнин",Fatname="Иннокентиевич",Email=""},
-                new Student(){Name="Вова", Surname="Авова",Fatname="Моцартович",Email=""},
-                new Student(){Name="Джо", Surname="Вигин",Fatname="Александрович",Email=""},
-                new Student(){Name="Хелена", Surname="Осиповна",Fatname="Николасовна",Email=""}
+                new Student(){Name="Никита", Surname="Рудик",Fatname="Витальевич", Email="",EducationFacility="Школа приключений"},
+                new Student(){Name="Вася", Surname="Васнин",Fatname="Иннокентиевич",Email="",EducationFacility="Школа приключений"},
+                new Student(){Name="Вова", Surname="Авова",Fatname="Моцартович",Email="",EducationFacility="Школа приключений"},
+                new Student(){Name="Джо", Surname="Вигин",Fatname="Александрович",Email="",EducationFacility="Школа приключений"},
+                new Student(){Name="Хелена", Surname="Осиповна",Fatname="Николасовна",Email="",EducationFacility="Школа приключений"}
                 });
-                Tasks.AddRange(new Problem[]
-                {
-                new Problem(){ Text="1+2=" },
-                new Problem(){ Text="1+3=" },
-                new Problem(){ Text="1+4=" },
-                new Problem(){ Text="1+5=" },
-                new Problem(){ Text="1+6=" },
-                });
+
                 Roles.AddRange(new Role[] {
                 new Role()
                 {
@@ -90,7 +84,7 @@ namespace DiplomaWebApp.DataBase
                 .WithOne(x=>x.Game);
 
             builder.Entity<Student>()
-                .HasMany<Team>()
+                .HasMany(x=>x.Teams)
                 .WithMany(x => x.Students);
                 
             builder.Entity<Team>().
@@ -98,10 +92,12 @@ namespace DiplomaWebApp.DataBase
             builder.Entity<Team>().
                 HasOne(x => x.Captain);
 
-            builder.Entity<Round>().
-                HasOne(x => x.Opponent);
-            builder.Entity<Round>().
-                HasOne(x => x.Speaker);
+            builder.Entity<Round>()
+                .HasOne(x => x.Opponent)
+                .WithMany(x=>x.OpponentRounds).HasForeignKey(x=>x.OpponentId);
+            builder.Entity<Round>()
+                .HasOne(x => x.Speaker)
+                .WithMany(x => x.SpeakerRounds).HasForeignKey(x => x.SpeakerId);
 
             builder.Entity<Break>().
                 HasOne(x => x.InitiatorTeam).

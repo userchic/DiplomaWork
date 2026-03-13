@@ -6,12 +6,15 @@ import { type Task } from "../Models/Task"
 export default function Tasks() {
     const [Loading, setLoading] = useState(true)
     const [tasks, setTasks] = useState<Task[]>([])
+    const [Page, setPage] = useState(1)
+    const getTasks = async () => {
+        const newTasks = await GetTasks(Page)
+        setTasks(tasks.concat(newTasks))
+        setLoading(false)
+        setPage(Page + 1)
+    }
     useEffect(() => {
-        const getTasks = async () => {
-            const tasks = await GetTasks()
-            setTasks(tasks)
-            setLoading(false)
-        }
+
         getTasks()
     }, [])
     function RemoveTaskCard(id: number) {
@@ -53,6 +56,7 @@ export default function Tasks() {
 
                         </tbody>
                     </table>
+                    <input type="button" value="Ещё" onClick={getTasks} />
                 </>
             }
         </>

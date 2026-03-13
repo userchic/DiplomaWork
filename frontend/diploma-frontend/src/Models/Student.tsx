@@ -4,5 +4,6 @@ export interface Student {
     Name: string,
     Surname: string,
     Fatname: string,
-    Email?: string
+    Email?: string,
+    EducationFacility: string
 }

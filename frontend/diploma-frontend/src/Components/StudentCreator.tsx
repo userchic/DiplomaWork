@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react"
 import { CreateStudent } from "../Services/AdminService"
-import { type Task } from "../Models/Task"
+
 import type { Student } from "../Models/Student"
 
 export default function StudentCreator() {
@@ -8,6 +8,7 @@ export default function StudentCreator() {
     const [surname, setSurname] = useState<string>("")
     const [fatname, setFatname] = useState<string>("")
     const [email, setEmail] = useState<string>("")
+    const [educationFacility, setEducationFacility] = useState("")
 
     function Create() {
         let newStudent: Student = {
@@ -15,6 +16,7 @@ export default function StudentCreator() {
             Surname: surname,
             Fatname: fatname,
             Email: email,
+            EducationFacility: educationFacility,
             Id: undefined
         }
 
@@ -38,20 +40,45 @@ export default function StudentCreator() {
     function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value)
     }
+    function handleEducationFacilityChange(event: ChangeEvent<HTMLInputElement>) {
+        setEducationFacility(event.target.value)
+    }
     return (
         <>
             <h1>Создание студентов</h1>
             <div style={{ display: "inline-block" }}>
-                Имя:<br />
-                Фамилия:<br />
-                Отчество:<br />
-                Email:
+                <div className="inputLabel">
+                    Имя:<br />
+                </div>
+                <div className="inputLabel">
+                    Фамилия:<br />
+                </div>
+                <div className="inputLabel">
+                    Отчество:<br />
+                </div>
+                <div className="inputLabel">
+                    Email:
+                </div>
+                <div className="inputLabel">
+                    Образовательное учреждение:
+                </div>
             </div >
             <div style={{ display: "inline-block" }}>
-                <input type="text" value={name} onChange={handleNameChange} /><br />
-                <input type="text" value={surname} onChange={handleSurnameChange} /><br />
-                <input type="text" value={fatname} onChange={handleFatnameChange} /><br />
-                <input type="text" value={email} onChange={handleEmailChange} /><br />
+                <div className="input">
+                    <input type="text" value={name} onChange={handleNameChange} /><br />
+                </div>
+                <div className="input">
+                    <input type="text" value={surname} onChange={handleSurnameChange} /><br />
+                </div>
+                <div className="input">
+                    <input type="text" value={fatname} onChange={handleFatnameChange} /><br />
+                </div>
+                <div className="input">
+                    <input type="text" value={email} onChange={handleEmailChange} />
+                </div>
+                <div className="input">
+                    <input type="text" value={educationFacility} onChange={handleEducationFacilityChange} />
+                </div>
             </div ><br />
             <input type="button" value="Создать задачу" onClick={Create} />
         </>

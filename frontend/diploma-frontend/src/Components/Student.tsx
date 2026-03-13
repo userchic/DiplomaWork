@@ -1,5 +1,5 @@
 import { useEffect, useState, type ChangeEvent } from "react"
-import { GetStudent, UpdateStudent } from "../Services/AdminService"
+import { GetStudentInfo, UpdateStudent } from "../Services/AdminService"
 import type { Student } from "../Models/Student"
 import { useParams } from "react-router"
 
@@ -9,16 +9,18 @@ export default function Student() {
     const [surname, setSurname] = useState<string>("")
     const [fatname, setFatname] = useState<string>("")
     const [email, setEmail] = useState<string>("")
+    const [educationFacility, setEducationFacility] = useState("")
 
     useEffect(() => {
         if (typeof params.id == "string") {
             let id: number = parseInt(params['id'])
             const getStudent = async () => {
-                const student = await GetStudent(id)
+                const student = await GetStudentInfo(id)
                 setName(student.name)
                 setSurname(student.surname)
                 setFatname(student.fatname)
                 setEmail(student.email)
+                setEducationFacility(student.EducationFacility)
             }
             getStudent()
         }
@@ -29,6 +31,7 @@ export default function Student() {
             Surname: surname,
             Fatname: fatname,
             Email: email,
+            EducationFacility: educationFacility,
             Id: params.id
         }
 
@@ -52,21 +55,46 @@ export default function Student() {
     function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value)
     }
+    function handleEducationFacilityChange(event: ChangeEvent<HTMLInputElement>) {
+        setEducationFacility(event.target.value)
+    }
     return (
         <>
             <h1>Редактирование студента</h1>
             <div style={{ display: "inline-block" }}>
-                Имя:<br />
-                Фамилия:<br />
-                Отчество:<br />
-                Email:
-            </div>
+                <div className="inputLabel">
+                    Имя:<br />
+                </div>
+                <div className="inputLabel">
+                    Фамилия:<br />
+                </div>
+                <div className="inputLabel">
+                    Отчество:<br />
+                </div>
+                <div className="inputLabel">
+                    Email:
+                </div>
+                <div className="inputLabel">
+                    Образовательное учреждение:
+                </div>
+            </div >
             <div style={{ display: "inline-block" }}>
-                <input type="text" value={name} onChange={handleNameChange} /><br />
-                <input type="text" value={surname} onChange={handleSurnameChange} /><br />
-                <input type="text" value={fatname} onChange={handleFatnameChange} /><br />
-                <input type="text" value={email} onChange={handleEmailChange} /><br />
-            </div><br />
+                <div className="input">
+                    <input type="text" value={name} onChange={handleNameChange} /><br />
+                </div>
+                <div className="input">
+                    <input type="text" value={surname} onChange={handleSurnameChange} /><br />
+                </div>
+                <div className="input">
+                    <input type="text" value={fatname} onChange={handleFatnameChange} /><br />
+                </div>
+                <div className="input">
+                    <input type="text" value={email} onChange={handleEmailChange} /><br />
+                </div>
+                <div className="input">
+                    <input type="text" value={educationFacility} onChange={handleEducationFacilityChange} /><br />
+                </div>
+            </div ><br />
             <input type="button" value="Отредактировать задачу" onClick={Edit} />
         </>
     )

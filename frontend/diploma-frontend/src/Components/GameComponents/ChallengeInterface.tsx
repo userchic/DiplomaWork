@@ -28,9 +28,10 @@ export default function ChallengeInterface({ setState, Tasks, CallingTeamName, C
     return (
         <>
             <div style={{ display: "inline-block" }}>
+                <h3>Вызов</h3>
                 <input type="button" value="Зафиксировать вызов" onClick={handleChallengeCall} />
                 <br />
-                Вызывающая команда: "{CallingTeamName}"<br />
+                Вызывающая команда: <b>"{CallingTeamName}"</b><br />
                 Задача:
                 <select value={ChosenTaskId} onChange={handleChosenTaskChange} >
                     {Tasks.map((task) => {

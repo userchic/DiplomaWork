@@ -1,22 +1,26 @@
 import { useState, type ChangeEvent } from "react"
 import type { Team } from "../../Models/Team"
 import type { Mistake } from "../../Models/Mistake"
+import type { Challenge } from "../../Models/Challenge"
+import ChangesInfo from "./ChangesInfo"
+import BreaksInfo from "./BreaksInfo"
 
 interface Props {
     setState: (newState: string) => void,
+    challenge: Challenge,
     Team1: Team,
     Team2: Team,
     speakerId: number,
     opponentId: number,
     ChallengingTeamId: number,
     isCheckingCorrectness: boolean,
-    ConfirmNoSolution: () => void,
-    DeclareRolesChange: (isFullRoleChange: boolean) => void,
-    DeclareBreak: (BreakRequestingTeamId: number) => void,
-    DeclareChange: (ChangeRequestingTeamId: number, NewParticipantId: number) => void,
+    ConfirmNoSolution: () => Promise<boolean>,
+    DeclareRolesChange: (isFullRoleChange: boolean) => Promise<boolean>,
+    DeclareBreak: (BreakRequestingTeamId: number) => Promise<boolean>,
+    DeclareChange: (ChangeRequestingTeamId: number, NewParticipantId: number) => Promise<boolean>,
     EndRound: (Team1Points: number, Team2Points: number, AssessorsPoints: number, Mistakes: Mistake[]) => Promise<boolean>
 }
-export default function MainPartInterface({ setState, Team1, Team2, ChallengingTeamId, speakerId, opponentId, isCheckingCorrectness, ConfirmNoSolution, DeclareRolesChange, DeclareBreak, DeclareChange, EndRound }: Props) {
+export default function MainPartInterface({ setState, challenge, Team1, Team2, ChallengingTeamId, speakerId, opponentId, isCheckingCorrectness, ConfirmNoSolution, DeclareRolesChange, DeclareBreak, DeclareChange, EndRound }: Props) {
     const [BreakRequestingTeamId, setBreakRequestingTeamId] = useState(Team1.Id)
     const [ChangeRequestingTeamId, setChangeRequestingTeamId] = useState(Team1.Id)
     const [NewParticipantId, setNewParticipantId] = useState(Team1.Students.$values[0].Id)
@@ -24,6 +28,9 @@ export default function MainPartInterface({ setState, Team1, Team2, ChallengingT
     const [Team2Points, setTeam2Points] = useState(0)
     const [AssessorPoints, setAssessorPoints] = useState(0)
     const [Mistakes, setMistakes] = useState<Mistake[]>([])
+
+    const [Challenge] = useState(challenge)
+    const [Round, setRound] = useState(Challenge.Round)
 
     const [CallingTeam] = useState(Team1.Id == ChallengingTeamId ? Team1 : Team2)
     const [CalledTeam] = useState(Team1.Id == ChallengingTeamId ? Team2 : Team1)
@@ -36,20 +43,67 @@ export default function MainPartInterface({ setState, Team1, Team2, ChallengingT
 
     const [Speaker] = useState(SpeakerTeam.Students.$values.find((student) => student.Id == SpeakerId))
     const [Opponent] = useState(OpponentTeam.Students.$values.find((student) => student.Id == OpponentId))
-    function handlePartialRolesChangeFixation(): void {
-        DeclareRolesChange(false)
+    async function handlePartialRolesChangeFixation() {
+        let res = await DeclareRolesChange(false)
+        if (res) {
+            setRound((round) => {
+                round.RolesChange = {
+                    ChangeTime: new Date(),
+                    FullRoleChange: false,
+                    RoundId: Round?.Id
+                }
+                return Object.create(round)
+            })
+        }
     }
 
-    function handleFullRolesChangeFixation(): void {
-        DeclareRolesChange(true)
+    async function handleFullRolesChangeFixation() {
+        let res = await DeclareRolesChange(true)
+        if (res) {
+            setRound((round) => {
+                round.RolesChange = {
+                    ChangeTime: new Date(),
+                    FullRoleChange: true,
+                    RoundId: Round?.Id
+                }
+                return Object.create(round)
+            })
+        }
     }
 
-    function handleBreakDeclaration(): void {
-        DeclareBreak(BreakRequestingTeamId)
+    async function handleBreakDeclaration() {
+        let res = await DeclareBreak(BreakRequestingTeamId)
+        if (res) {
+            setRound((round) => {
+                round.Breaks.$values.concat({
+                    DeclareTime: new Date(),
+                    InitiatorTeamId: ChangeRequestingTeamId,
+                    InitiatorTeam: SpeakerTeam.Id === ChangeRequestingTeamId ? SpeakerTeam : OpponentTeam,
+                    RoundId: round.Id
+                })
+                return Object.create(round)
+            })
+        }
     }
 
-    function handleChangeDeclaration(): void {
-        DeclareChange(ChangeRequestingTeamId, NewParticipantId)
+    async function handleChangeDeclaration() {
+        let res = await DeclareChange(ChangeRequestingTeamId, NewParticipantId)
+        if (res) {
+            setRound((round) => {
+                let newChange = {
+
+                    DeclareTime: new Date(),
+                    RoundId: round.Id,
+                    RoleId: SpeakerTeam.Id === ChangeRequestingTeamId ? SpeakerTeam.Id : OpponentTeam.Id,
+                    NewParticipantId: NewParticipantId,
+                    NewParticipant: SpeakerTeam.Id === ChangeRequestingTeamId ? SpeakerTeam.Students.$values.find((stud) => stud.Id == NewParticipantId) : OpponentTeam.Students.$values.find((stud) => stud.Id == NewParticipantId),
+                    InitiatorTeamId: ChangeRequestingTeamId,
+                    InitiatorTeam: SpeakerTeam.Id === ChangeRequestingTeamId ? SpeakerTeam : OpponentTeam
+                }
+                round.Changes.$values = round?.Changes.$values.concat(newChange)
+                return Object.create(round)
+            })
+        }
     }
 
     function handleMistakeCreation(): void {
@@ -87,62 +141,74 @@ export default function MainPartInterface({ setState, Team1, Team2, ChallengingT
         setAssessorPoints(parseInt(event.target.value))
     }
 
-    function handleNoSolutionFixation(): void {
-        ConfirmNoSolution()
+    async function handleNoSolutionFixation() {
+        let res = await ConfirmNoSolution()
+        if (res) {
+            setRound((round) => {
+                round.NoSolution = true;
+                return Object.create(round)
+            })
+        }
     }
 
     return (
         <>
-            Изначальный Докладчика: {Speaker.Surname} {Speaker.Name} {Speaker.Fatname}<br />
-            Команда Докладчика: {SpeakerTeam.Name}<br />
-            Изначальный Оппонент: {Opponent.Surname} {Opponent.Name} {Opponent.Fatname}<br />
-            Команда Оппонента: {OpponentTeam.Name}<br />
-            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать частичную перемену ролей" onClick={handlePartialRolesChangeFixation} />
-            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать полную перемену ролей" onClick={handleFullRolesChangeFixation} /><br />
-            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать отсутствие решения" onClick={handleNoSolutionFixation} /><br />
+            <h3>Выступление</h3>
+            <b>Задача:</b> {Challenge.Task?.Text}<br />
+            <h3>Выступающие</h3>
+            <table style={{ width: "50%" }} className="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Роль
+                        </th>
+                        <th>
+                            Выступающий
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Команда
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Докладчик
+                        </td>
+                        <td>
+                            {Round?.Speaker?.Surname} {Round?.Speaker?.Name} {Round?.Speaker?.Fatname}
+                        </td>
+                        <td>
+                            {Round?.Speaker?.Email}
+                        </td>
+                        <td>
+                            {SpeakerTeam?.Name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Оппонент
+                        </td>
+                        <td>
+                            {Round?.Opponent?.Surname} {Round?.Opponent?.Name} {Round.Opponent?.Fatname}
+                        </td>
+                        <td>
+                            {Round?.Opponent?.Email}
+                        </td>
+                        <td>
+                            {OpponentTeam?.Name}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <br />
-            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать перерыв" onClick={handleBreakDeclaration} />
-            Команда запросившая перерыв:<select value={BreakRequestingTeamId} onChange={HandleBreakRequestingTeamIdChange}>
-                <option value={Team1.Id}>
-                    Команда {Team1.Name}
-                </option>
-                <option value={Team2.Id}>
-                    Команда {Team2.Name}
-                </option>
-            </select>
             <br />
-            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать замену" onClick={handleChangeDeclaration} />
-            Команда запросившая замену:<select value={ChangeRequestingTeamId} onChange={HandleChangeRequestingTeamIdChange}>
-                <option value={Team1.Id}>
-                    Команда {Team1.Name}
-                </option>
-                <option value={Team2.Id}>
-                    Команда {Team2.Name}
-                </option>
-            </select>
-            <br />
-            Новый выступающий:<select value={NewParticipantId} onChange={HandleNewParticipantIdChange}>
-                {ChangeRequestingTeamId == Team1.Id ?
-                    Team1.Students.$values.map((student) => {
-                        return (
-                            <option value={student.Id}>
-                                {student.Name} {student.Surname} {student.Fatname}
-                            </option>
-                        )
-                    })
-                    : Team2.Students.$values.map((student) => {
-                        return (
-                            <option value={student.Id}>
-                                {student.Name} {student.Surname} {student.Fatname}
-                            </option>
-                        )
-                    })
-                }
-            </select>
-            <br />
-            <br />
+            <h3>Ошибки</h3>
             <input type="button" value="Создать ошибку" onClick={handleMistakeCreation} />
-            <table>
+            <table className="table" style={{ width: "40%" }}>
                 <thead>
                     <tr>
                         <th>
@@ -205,10 +271,80 @@ export default function MainPartInterface({ setState, Team1, Team2, ChallengingT
                     }
                 </tbody>
             </table>
-            Очки 1 команды:<input style={{ display: "inline-block" }} type="number" value={Team1Points} onChange={handleTeam1PointsChange} />
-            Очки 2 команды:<input style={{ display: "inline-block" }} type="number" value={Team2Points} onChange={handleTeam2PointsChange} />
-            Очки жюри:<input style={{ display: "inline-block" }} type="number" value={AssessorPoints} onChange={handleAssessorPointsChange} />
-            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать результаты и закончить раунд" onClick={handleRoundEnd} />
+
+            <h3>Баллы команд</h3>
+            <div style={{ display: "inline-block" }}>
+                Очки команды "{Team1.Name}":<input style={{ display: "inline-block" }} type="number" value={Team1Points} onChange={handleTeam1PointsChange} />
+            </div>
+            <div style={{ display: "inline-block" }}>
+                Очки команды "{Team2.Name}":<input style={{ display: "inline-block" }} type="number" value={Team2Points} onChange={handleTeam2PointsChange} />
+            </div>
+            <div style={{ display: "inline-block" }}>
+                Очки жюри:<input style={{ display: "inline-block" }} type="number" value={AssessorPoints} onChange={handleAssessorPointsChange} />
+            </div>
+            <input style={{ display: "inline-block", background: "black", color: "white" }} type="button" value="Зафиксировать результаты и закончить раунд" onClick={handleRoundEnd} />
+            <h3>События</h3>
+            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать частичную перемену ролей" onClick={handlePartialRolesChangeFixation} />
+            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать полную перемену ролей" onClick={handleFullRolesChangeFixation} /><br />
+            {
+                Challenge.Round.RolesChange !== null && Round.RolesChange !== undefined ?
+                    "Произошла ".concat(
+                        Round.RolesChange?.FullRoleChange ? "полная" : "частичная").concat(
+                            " перемена ролей") :
+                    "Не было перемены ролей"
+            }
+            <br /><br />
+            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать отсутствие решения" onClick={handleNoSolutionFixation} /><br />
+            {
+                Challenge.Round.NoSolution ?
+                    "Зафиксировано отсутствие решения" :
+                    "Решение присутствует"
+            }
+            <br />
+
+            <br />
+            <input style={{ display: "inline-block" }} type="button" value="Зафиксировать перерыв" onClick={handleBreakDeclaration} />
+            Команда запрашивающая перерыв:<select value={BreakRequestingTeamId} onChange={HandleBreakRequestingTeamIdChange}>
+                <option value={Team1.Id}>
+                    Команда "{Team1.Name}"
+                </option>
+                <option value={Team2.Id}>
+                    Команда "{Team2.Name}"
+                </option>
+            </select>
+            <BreaksInfo Breaks={Round?.Breaks} /><br /><br />
+            <div >
+                <input style={{ display: "inline-block" }} type="button" value="Зафиксировать замену" onClick={handleChangeDeclaration} />
+                Команда запрашивающая замену:<select value={ChangeRequestingTeamId} onChange={HandleChangeRequestingTeamIdChange}>
+                    <option value={Team1.Id}>
+                        Команда "{Team1.Name}"
+                    </option>
+                    <option value={Team2.Id}>
+                        Команда "{Team2.Name}"
+                    </option>
+                </select>
+                <br />
+
+                Новый выступающий:<select value={NewParticipantId} onChange={HandleNewParticipantIdChange}>
+                    {ChangeRequestingTeamId == Team1.Id ?
+                        Team1.Students.$values.map((student) => {
+                            return (
+                                <option value={student.Id}>
+                                    {student.Name} {student.Surname} {student.Fatname}
+                                </option>
+                            )
+                        })
+                        : Team2.Students.$values.map((student) => {
+                            return (
+                                <option value={student.Id}>
+                                    {student.Name} {student.Surname} {student.Fatname}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
+                <ChangesInfo Changes={Round?.Changes} />
+            </div>
         </>
     )
 }

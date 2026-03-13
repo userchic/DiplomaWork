@@ -4,6 +4,7 @@ namespace DiplomaWebApp.Repositories
 {
     public abstract class Repository
     {
+        protected int pageSize = 10;
         protected MathBattlesDbContext _context;
         public Repository(MathBattlesDbContext context)
         {

@@ -34,17 +34,21 @@ export default function LoginSection() {
     }
     return (
         <>
-            <h2>Вход в систему</h2>
-            <div style={{ display: "inline-block" }}>
-                Логин<br />
-                Пароль
+            <div className="centering-parent">
+                <div className="block">
+                    <h2>Вход в систему</h2>
+                    <div style={{ display: "inline-block" }}>
+                        Логин<br />
+                        Пароль
+                    </div>
+                    <div style={{ display: "inline-block" }}>
+                        <input type="text" id="login" value={login} onChange={handleLoginChange} /><br />
+                        <input type="password" id="password" value={password} onChange={handlePasswordChange} /><br />
+                    </div>
+                    <div id="message">{message}</div>
+                    <input type="button" value="Войти" onClick={() => callLogin()} />
+                </div>
             </div>
-            <div style={{ display: "inline-block" }}>
-                <input type="text" id="login" value={login} onChange={handleLoginChange} /><br />
-                <input type="password" id="password" value={password} onChange={handlePasswordChange} /><br />
-            </div>
-            <div id="message">{message}</div>
-            <input type="button" value="Войти" onClick={() => callLogin()} />
         </>
     )
 }

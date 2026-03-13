@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import type { Team } from "../../Models/Team";
 
 interface Props {
@@ -14,9 +14,21 @@ export default function ParticipantsChoosingInterface({ setState, Team1, Team2, 
     let CallingTeam = Team1.Id == ChallengingTeamId ? Team1 : Team2
     let CalledTeam = Team1.Id == ChallengingTeamId ? Team2 : Team1
 
-    let SpeakerTeam = isCheckingCorrectness ? CallingTeam : CalledTeam
-    let OpponentTeam = isCheckingCorrectness ? CalledTeam : CallingTeam
-
+    const [SpeakerTeam] = useState(isCheckingCorrectness ? CallingTeam : CalledTeam)
+    const [OpponentTeam, setOpponentTeam] = useState(isCheckingCorrectness ? CalledTeam : CallingTeam)
+    useEffect(() => {
+        setOpponentTeam((Team) => {
+            Team.Students.$values = Team.Students.$values.concat([
+                {
+                    Fatname: "",
+                    Name: "нет оппонента",
+                    Surname: "",
+                    Email: "",
+                    Id: -1
+                }])
+            return Object.create(Team)
+        })
+    }, [])
     const [SpeakerId, setSpeakerId] = useState<number>(SpeakerTeam.Students.$values[0].Id)
     const [OpponentId, setOpponentId] = useState<number>(OpponentTeam.Students.$values[0].Id)
 
@@ -37,6 +49,7 @@ export default function ParticipantsChoosingInterface({ setState, Team1, Team2, 
 
     return (
         <>
+            <h3>Выбор выступающих</h3>
             Изначальный докладчик: <select value={SpeakerId} onChange={handleSpeakerIdChange}>
                 {
                     SpeakerTeam.Students.$values.map((student) => {

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36202.13 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11605.296 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiplomaWebApp", "DiplomaWebApp\DiplomaWebApp.csproj", "{354581F6-E784-43DB-8592-92930267F591}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{7C6CDD2A-1FE0-4348-AEB8-92632E1272F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{354581F6-E784-43DB-8592-92930267F591}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{354581F6-E784-43DB-8592-92930267F591}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{354581F6-E784-43DB-8592-92930267F591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6CDD2A-1FE0-4348-AEB8-92632E1272F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6CDD2A-1FE0-4348-AEB8-92632E1272F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6CDD2A-1FE0-4348-AEB8-92632E1272F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6CDD2A-1FE0-4348-AEB8-92632E1272F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,27 +15,36 @@ export default function Timer() {
     useEffect(() => {
         const getSolvingLength = async () => {
             const res: Game = await GetGame(gameId)
-            Minutes = res.SolvingTime
-            setMinutes(res.SolvingTime)
-            clearInterval(timerIndex)
-            timerIndex = setInterval(() => {
-                if (Seconds > 0) {
-                    Seconds = Seconds - 1
-                    setSeconds(Seconds)
-                }
-                else
-                    if (Minutes > 0) {
-                        Minutes = Minutes - 1
-                        Seconds = 59
-                        setMinutes(Minutes)
-                        setSeconds(59)
+            let endDate = new Date(res.TaskSolvingStartTime)
+            endDate.setMinutes(endDate.getMinutes() + res.SolvingTime)
+            let currentTime = new Date()
+            let timer = -(currentTime.getTime() - endDate.getTime()) / 1000
+            if (timer > 0) {
+                Minutes = Math.floor(timer / 60)
+                setMinutes(Math.floor(timer / 60))
+                Seconds = Math.floor(timer % 60)
+                setSeconds(Math.floor(timer % 60))
+                clearInterval(timerIndex)
+                timerIndex = setInterval(() => {
+                    if (Seconds > 0) {
+                        Seconds = Seconds - 1
+                        setSeconds(Seconds)
                     }
-                    else {
-                        clearInterval(timerIndex)
-                        navigate("/CaptainsCompetetion/" + gameId)
-                    }
-            }, 1000)
-
+                    else
+                        if (Minutes > 0) {
+                            Minutes = Minutes - 1
+                            Seconds = 59
+                            setMinutes(Minutes)
+                            setSeconds(59)
+                        }
+                        else {
+                            clearInterval(timerIndex)
+                            navigate("/CaptainsCompetetion/" + gameId)
+                        }
+                }, 1000)
+            }
+            else
+                navigate("/CaptainsCompetetion/" + gameId)
         }
         getSolvingLength()
         return () => clearInterval(timerIndex)
@@ -43,8 +52,9 @@ export default function Timer() {
     return (
         <>
             <center>
+                <h3>Время решения задач</h3>
                 Таймер отсчета времени до начала выступлений:<br />
-                {minutes} : {seconds}
+                {minutes} : {seconds.toString().padStart(2, '0')}
             </center>
         </>
     )

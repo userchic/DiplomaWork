@@ -7,26 +7,30 @@ namespace DiplomaWebApp.Repositories
 {
     public class GameRepository : Repository, IGameRepository
     {
-        int pageSize = 10;
         public GameRepository(MathBattlesDbContext context) : base(context)
         {
             
         }
         public ICollection<Game> GetGames(int page = 1)
         {
-            int lastGameId = _context.Games.OrderBy(x=>x.Id).Last().Id;
-            return _context.Games.OrderBy(x => -x.Id).Where(x => (x.Id >= lastGameId - pageSize * page && x.Id <= lastGameId - pageSize * (page-1))).
-                Include(x => x.Team1).ThenInclude(x => x.Students).
-                Include(x => x.Team2).ThenInclude(x => x.Students).
-                Include(x => x.Tasks).
-                Include(x => x.Assessor).
-                Include(x => x.CaptainsRound).
-                Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.Breaks).
-                Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.Changes).
-                Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.RolesChange).
-                Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.RoundResults).ThenInclude(x => x.Mistakes).
-                Take(10).
-                ToArray();
+            IList<Game> game = _context.Games.OrderBy(x => -x.Id).Take(1).ToList();
+            if (game.Count == 1)
+            {
+                int lastId = game[0].Id;
+                return _context.Games.OrderBy(x => -x.Id).Where(x => (x.Id > lastId - pageSize * page && x.Id <= lastId - pageSize * (page - 1))).
+                    Include(x => x.Team1).ThenInclude(x => x.Students).
+                    Include(x => x.Team2).ThenInclude(x => x.Students).
+                    Include(x => x.Tasks).
+                    Include(x => x.Assessor).
+                    Include(x => x.CaptainsRound).
+                    Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.Breaks).
+                    Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.Changes).
+                    Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.RolesChange).
+                    Include(x => x.Challenges).ThenInclude(x => x.Round).ThenInclude(x => x.RoundResults).ThenInclude(x => x.Mistakes).
+                    Take(10).ToArray();
+            }
+            else
+                return (ICollection<Game>)Array.CreateInstance(typeof(Game), 0);
         }
         public Game? GetGame(int id)
         {

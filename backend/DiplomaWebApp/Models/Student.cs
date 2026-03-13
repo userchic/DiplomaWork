@@ -10,6 +10,11 @@ namespace DiplomaWebApp.Models
         public string Surname { get; set; }
         public string Fatname { get; set; }
         public string Email { get; set; }
+        public string EducationFacility { get; set; }
+        public ICollection<Round> SpeakerRounds { get; set; } 
+        public ICollection<Round> OpponentRounds { get; set; } 
+        public ICollection<Team> Teams { get; set; }
+
         public Student()
         {
 
@@ -22,6 +27,7 @@ namespace DiplomaWebApp.Models
             Surname = studentRecord.Surname;
             Fatname = studentRecord.Fatname;
             Email = studentRecord.Email;
+            EducationFacility = studentRecord.EducationFacility;
         }
     }
 }
