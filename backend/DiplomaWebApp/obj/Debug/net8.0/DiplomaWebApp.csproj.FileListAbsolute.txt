@@ -332,3 +332,4 @@ C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\BuildHost-netcore\tr\System.CommandLine.resources.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\BuildHost-netcore\zh-Hans\System.CommandLine.resources.dll
 C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\BuildHost-netcore\zh-Hant\System.CommandLine.resources.dll
+C:\Users\Руслан Габзалилов\Desktop\Diploma\backend\DiplomaWebApp\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

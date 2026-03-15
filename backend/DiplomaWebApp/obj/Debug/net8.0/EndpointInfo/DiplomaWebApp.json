@@ -1154,6 +1154,7 @@
           "chosenTasksIds",
           "eventPlace",
           "name",
+          "plannedStartTime",
           "solvingTime",
           "studentsTeam1",
           "studentsTeam2",
@@ -1187,6 +1188,10 @@
           "eventPlace": {
             "minLength": 1,
             "type": "string"
+          },
+          "plannedStartTime": {
+            "type": "string",
+            "format": "date-time"
           },
           "studentsTeam1": {
             "type": "array",

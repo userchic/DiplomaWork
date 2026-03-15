@@ -23,8 +23,7 @@ namespace DiplomaWebApp.Controllers
         public IJureRepository jureRep;
         Counter _loginCounter;
         Counter _registryCounter;
-        public HomeController(ILogger<HomeController> logger,
-            IJureRepository jurerep,MathBattlesDbContext context)
+        public HomeController(IJureRepository jurerep)
         {
             jureRep = jurerep;
             _loginCounter = Metrics.CreateCounter("logins_total", "increments on login");
@@ -32,7 +31,7 @@ namespace DiplomaWebApp.Controllers
         }
         [HttpPost]
         
-        public IActionResult Login([FromBody]LoginRecord input)
+        public IActionResult Login([FromBody]LoginRequestRecord input)
         {
             if (!ModelState.IsValid)
             {
@@ -70,7 +69,7 @@ namespace DiplomaWebApp.Controllers
         
 
         [HttpPost]
-        public IActionResult Registry([FromBody]JureRecord jure)
+        public IActionResult Registry([FromBody]RegistryRequestRecord jure)
         {
             if (!ModelState.IsValid)
             {
