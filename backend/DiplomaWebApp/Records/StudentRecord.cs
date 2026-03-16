@@ -12,6 +12,7 @@ namespace DiplomaWebApp.Records
         [Required(ErrorMessage = "Не введена фамилия студента, введите её")]
         public string Surname { get; set; }
         public string? Fatname { get; set; }
+        [Required(ErrorMessage ="Не указано обр. учреждения студента")]
         public string EducationFacility { get; set; }
 
         [IsEmailOrEmptyString(ErrorMessage="Введенный Email не распознан как EMail. Введите еще раз")]

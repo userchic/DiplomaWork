@@ -15,6 +15,7 @@ namespace DiplomaWebApp.Models
         }
         public Problem (TaskRecord taskRecord)
         {
+            Id = taskRecord.Id;
             Text=taskRecord.Text;
         }
         public Problem() { }

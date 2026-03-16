@@ -668,7 +668,7 @@
     "Parameters": [
       {
         "Name": "input",
-        "Type": "DiplomaWebApp.Records.LoginRecord",
+        "Type": "DiplomaWebApp.Records.LoginRequestRecord",
         "IsRequired": true
       }
     ],
@@ -694,7 +694,7 @@
     "Parameters": [
       {
         "Name": "jure",
-        "Type": "DiplomaWebApp.Records.JureRecord",
+        "Type": "DiplomaWebApp.Records.RegistryRequestRecord",
         "IsRequired": true
       }
     ],

@@ -1049,17 +1049,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRecord"
+                "$ref": "#/components/schemas/LoginRequestRecord"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRecord"
+                "$ref": "#/components/schemas/LoginRequestRecord"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRecord"
+                "$ref": "#/components/schemas/LoginRequestRecord"
               }
             }
           }
@@ -1092,17 +1092,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/JureRecord"
+                "$ref": "#/components/schemas/RegistryRequestRecord"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/JureRecord"
+                "$ref": "#/components/schemas/RegistryRequestRecord"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/JureRecord"
+                "$ref": "#/components/schemas/RegistryRequestRecord"
               }
             }
           }
@@ -1236,39 +1236,7 @@
         },
         "additionalProperties": false
       },
-      "JureRecord": {
-        "required": [
-          "login",
-          "name",
-          "password",
-          "surname"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "surname": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "fatname": {
-            "type": "string",
-            "nullable": true
-          },
-          "login": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "password": {
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "LoginRecord": {
+      "LoginRequestRecord": {
         "required": [
           "login",
           "password"
@@ -1303,6 +1271,38 @@
           "opponentCost": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistryRequestRecord": {
+        "required": [
+          "login",
+          "name",
+          "password",
+          "surname"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "surname": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "fatname": {
+            "type": "string",
+            "nullable": true
+          },
+          "login": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
