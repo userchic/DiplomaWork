@@ -67,6 +67,10 @@ export default function RoundInterface({ challenge, Game, EndRound, RejectToChal
                 challenge.TaskId = TaskId
                 challenge.Task = Game.Tasks.$values.find((task) => task.Id == TaskId)
                 challenge.DeclareTime = new Date()
+                if (Game.TeamRejectedToChallenge) {
+                    challenge.IsCheckingCorrectness = true
+                    setState("ParticipantChoosing")
+                }
                 return true
             }
             return false

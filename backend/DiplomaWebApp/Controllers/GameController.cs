@@ -240,8 +240,10 @@ namespace DiplomaWebApp.Controllers
                 return Json(new { success = 0, message = "Указанная задача не существует в рамках игры" });
             }
             currentGame.FixateChallenge(taskId);
+            if(currentGame.TeamRejectedToChallenge)
+                currentGame.FixateCorrectnessCheck();
             gameRep.Save();
-            return Json(new { success = 1, message = "успешно объявлен вызов" });
+                return Json(new { success = 1, message = "успешно объявлен вызов" });
         }
         [HttpPost]
         public IActionResult RejectToChallenge(int gameId)
@@ -431,7 +433,7 @@ namespace DiplomaWebApp.Controllers
             }
             Round newRound = new Round()
             {
-               OpponentId = round.OpponentId,
+                OpponentId = round.OpponentId,
                 SpeakerId = round.SpeakerId,
                 StartTime = DateTime.UtcNow,
                 ChallengeId = currentGame.Challenges.Last().Id,

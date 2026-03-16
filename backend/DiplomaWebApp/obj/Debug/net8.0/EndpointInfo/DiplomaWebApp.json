@@ -1332,6 +1332,7 @@
       },
       "StudentRecord": {
         "required": [
+          "educationFacility",
           "name",
           "surname"
         ],
@@ -1354,8 +1355,8 @@
             "nullable": true
           },
           "educationFacility": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "email": {
             "type": "string",
